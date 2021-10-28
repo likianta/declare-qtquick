@@ -5,9 +5,9 @@ from .base import PropertyGroup
 from .normal_properties import Number
 
 
-class AnchorsProp(PropertyGroup, PAnchors):
+class Anchors(PropertyGroup, PAnchors):
     
-    def __init__(self, qid: T.Qid, name: T.Name):
+    def __init__(self, qid: T.Qid, name: T.Name = 'anchors'):
         super().__init__(qid, name)
         self.properties.update({
             'center_in'        : Property(qid, name, None),
@@ -39,7 +39,7 @@ class AnchorsProp(PropertyGroup, PAnchors):
     def __setprop__(self, key, value):
         if key == 'center_in' or key == 'fill':
             # assert isinstance(value, Property)
-            self.properties[key].set(value.fullname)
+            self.properties[key].set(value.qid)
         elif key == 'margins' or key.endswith('_margin'):
             # assert isinstance(value, (int, float))
             self.properties[key].set(value)

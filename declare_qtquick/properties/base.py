@@ -39,7 +39,6 @@ class Property:
         if arg_1 is None:
             assert isinstance(arg_0, Property)
             self.bound.append((arg_0.fullname, None))
-            self.value = arg_0.fullname
             return
         
         if isinstance(arg_0, Property):
@@ -50,6 +49,10 @@ class Property:
     @property
     def fullname(self) -> T.FullName:
         return f'{self.qid}.{self.name}'
+    
+    def adapt(self):
+        """ Convert python type to qml type. """
+        return self.value
 
 
 class PropertyGroup(Property, PropGetterAndSetter):

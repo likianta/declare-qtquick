@@ -7,6 +7,9 @@ class Boolean(Property):
     
     def __init__(self, qid, name, default_value=False):
         super().__init__(qid, name, default_value)
+    
+    def adapt(self):
+        return 'true' if self.value else 'false'
 
 
 class Color(Property):
@@ -14,6 +17,9 @@ class Color(Property):
     
     def __init__(self, qid, name, default_value=''):
         super().__init__(qid, name, default_value)
+
+    def adapt(self):
+        return f'"{self.value}"'
 
 
 class Number(Property):
@@ -28,3 +34,6 @@ class String(Property):
     
     def __init__(self, qid, name, default_value=''):
         super().__init__(qid, name, default_value)
+    
+    def adapt(self):
+        return f'"{self.value}"'
