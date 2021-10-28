@@ -1,0 +1,79 @@
+"""
+Referred to 'Markdown images to base64' project.
+"""
+import pyml.qtquick
+import pyml.qtquick.controls
+import pyml.qtquick.window
+
+
+comp Main(Window): @win
+    attr:
+        history: {}  # {str ipath: str opath, ...}
+        input_path: ''
+        output_path: ''
+        succeed: False  # DELETE: this attribute can be deleted.
+        tip: ''
+
+    def reset(win):
+        win.output_path = ''
+        win.succeed = False
+        win.tip = ''
+
+    Column: @main
+
+        Row: @row1
+            Label:
+                text: 'Input .md/.html:'
+            TextField: @edt
+                text == win.input_path
+                on_text: win.reset(win)
+            Button:
+                text: 'Browse'
+                on_clicked :: win
+                    if file := FileDialog():
+                        win.input_path = file
+            Button:
+                text: 'Run'
+                on_clicked :: win
+                    from os.path import exists
+                    path = win.input_path
+
+                    if not exists(path):
+                        win.tip = 'The input file doesnt exist!'
+                        return
+                    if not path.endswith(('.md', '.html')):
+                        win.tip = 'Please input .md/.html file!'
+                        return
+
+                    if path.endswith('.md'):
+                        from md2html_base64 import main
+                    else:
+                        from html_base64 import main
+
+                    win.history[win.input_path] = win.output_path = main(path)
+                    win.tip = 'Succeed generate base64 file!'
+                    win.succeed = True
+
+        Row: @row2
+            Text:
+                text == win.tip
+            Button:
+                enabled: (win.output_path or win.input_path).endswith('.html')
+                text: 'Open'
+                on_clicked :: win
+                    from os import startfile
+                    if path := win.output_path:
+                        startfile(path)
+                    elif (path := win.input_path) in win.history:
+                        startfile(win.history[path])
+                    else:
+                        win.tip = 'Please click "Run" to generate base64 file' \
+                                  ' first.'
+
+
+if __name__ == '__main__':
+    from pyml.core import Application
+    with Application() as app:
+        win = Main()
+        win.show()
+        app.start()

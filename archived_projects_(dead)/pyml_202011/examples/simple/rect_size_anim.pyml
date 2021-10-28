@@ -1,0 +1,49 @@
+import pyml.qtquick
+import pyml.qtquick.controls
+import pyml.qtquick.window
+
+
+comp MyWindow(Window): @win
+    attr:
+        path: str
+    style:
+        w: 600
+        h: 800
+        padding: 20
+        bg_color: '#f2f2f2'
+    children:
+        orientation: 'vertical'
+        alignment: 'hcenter, top'
+    Container:
+        style:
+            size: 'ifill'
+        Rectangle: @rect
+            active: False
+            style:
+                bg_color: '#ffffff'
+                w: 100
+                h: 100
+                alignment: 'left, top'
+                anim:
+                    PropertyAnimation:
+                        when: active
+                        props:
+                            w: root.iw
+                            h: root.ih
+                            bg_color: '#ff00ff'
+                        duration: 1000
+                        motion: Easing.OutQuart
+        Button: @btn
+            text: 'Animate Rectangle'
+            on_clicked :: (rect)
+                rect.active = !rect.active
+            style:
+                alignment: 'hcenter, bottom'
+
+
+if __name__ == '__main__':
+    from pyml.core.launcher import Application
+    with Application() as app:
+        win = MyWindow()
+        win.show()
+        app.start()

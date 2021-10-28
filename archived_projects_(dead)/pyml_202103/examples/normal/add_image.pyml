@@ -1,0 +1,54 @@
+from pyml.qtquick import Rectangle
+
+
+comp Rectangle: @photo
+    attr thumbnail: False
+    attr image_source: str
+
+    def on_clicked():
+        pass
+
+    class FileFilter:
+        """
+        FileFilter only accepts the extensions defined in `__init__` method.
+        """
+
+        def __init__(self, *ext):
+            self.ext = tuple(ext)
+            self.holder = set()
+
+        def update(self, files):
+            files = set(filter(lambda f: f.endswith(self.ext), files))
+            self.holder.update(files)
+            return files
+
+    style:
+        pos: (20, 20)
+        size: (w, 150)
+            w ::
+                if (photo_image.w > 200):
+                    return photo_image.w
+                else:
+                    return 200
+        anim:
+            PropertyAnimation: @selected
+                props:
+                    border.color: 'red'
+                duration: 200
+
+    Rectangle: @border
+        style:
+            color: 'white'
+            pos: 'center'
+        Image: @photo_image
+            source: root.image_source
+            style:
+                pos: 'center'
+
+
+if __name__ == '__main__':
+    from pyml.core.launcher import Application
+    with Application() as app:
+        win = MyWindow()
+        win.show()
+        app.start()

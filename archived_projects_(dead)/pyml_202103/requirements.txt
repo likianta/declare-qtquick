@@ -1,0 +1,6 @@
+lk-logger
+lk-utils
+
+# for development
+bs4
+beautifulsoup4

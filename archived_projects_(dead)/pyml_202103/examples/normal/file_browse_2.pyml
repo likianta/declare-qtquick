@@ -1,0 +1,90 @@
+from os.path import exists
+
+import pyml.qtquick
+import pyml.qtquick.controls
+import pyml.qtquick.window
+
+
+comp MyWindow(Window): @win
+    style:
+        size: (800, 600)
+        visible: True
+
+    Column: @col
+        style:
+            margin: 10
+            size: 'fill'
+            spacing: 10
+        children:
+            height: 30
+
+        FileBrowse:
+            pass
+
+        BottomToolbar:
+            style:
+                height: 'fill'
+
+
+comp FileBrowse:
+    attr:
+        ifile: ''
+        idir: ''
+        label: ''
+        info: ''
+
+    on_idir ::
+        if not exists(self.idir):
+            self.info = 'The directory is not existent!'
+    on_info ::
+        raise Exception(self.info)
+
+    Row:
+        style:
+            size: 'fill'
+            spacing: 10
+            hpadding: 10
+        children:
+            height: 'fill'
+
+        Text:
+            text == root.label + ':'
+
+        TextField: @field
+            style:
+                width: 0.7
+            text: root.ifile
+
+        Button: @browse
+            style:
+                width: 'ifill'
+            text: 'Browse'
+            on_clicked ::
+                if (path := dialog.open()):
+                    root.ifile = path
+
+        FileDialog: @dialog
+            pass
+
+
+comp BottomToolbar:
+    Row:
+        style:
+            spacing: 'auto'
+            hmargin: 10
+            size: 'wrap'
+        children:
+            width: 80
+            height: 30
+
+        Button:
+            text: 'A'
+
+        Button:
+            text: 'B'
+
+        Button:
+            text: 'C'
+
+        Button:
+            text: 'D'

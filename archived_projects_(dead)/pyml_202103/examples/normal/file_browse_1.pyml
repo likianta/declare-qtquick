@@ -1,0 +1,51 @@
+import pyml.qtquick
+import pyml.qtquick.controls
+import pyml.qtquick.window
+
+
+comp MyWindow(Window): @win
+    attr:
+        pass
+
+    Column:
+        style:
+            size: 'ifill'
+            spacing: 20
+        FileBrowse:
+            pass
+        Rectangle: @rect
+            style:
+                pass
+
+
+comp FileBrowse(Row): @browse
+    attr:
+        text: ''
+        path: ''
+        placeholder: ''
+    style:
+        hpadding: 10
+        spacing: 10
+        size: 'ifill'
+        #   width: parent.iwidth
+        #   height: parent.iheight
+    Text: @label
+        text: root.text
+    Field: @field
+        style:
+            radius: 4
+            anim:
+                PropertyAnimation:
+                    when: field.focus
+                    props:
+                        border:
+                            width: 1
+                            color: '#cccccc'
+                        bg_color: '#ffffff'
+                    duration: 1000
+        placeholder: root.placeholder
+    Button: @btn
+        text: 'Browse'
+        on_click ::
+            if path := FileDialog():
+                root.path = path

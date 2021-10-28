@@ -1,0 +1,121 @@
+# Ripple.pyml
+# https://blog.csdn.net/qyvlik/article/details/51595197
+
+import pyml.qtquick
+
+
+comp Ripple(Item): @ripple
+    attr:
+        clip: bglayer.clip
+        radius: 0
+        radius_max ::
+            x = parent or self
+            w, h = x.size
+            return (w ** 2 + h ** 2) ** 0.5
+        radius_anim_rate: 0.048
+        radius_tail_anim_rate: 0.48
+        opacity_anim_duration: 800  # unit: ms
+        color: '#22000000'  # 22% black
+        readonly:  # custom readonly attrs
+            diameter: self.radius * 2
+            centerx: float
+            centery: float
+    style:
+        anchor: 'fill'
+
+    state: 'NORMAL'
+    states: [
+        State:
+            name: 'NORMAL'
+        State:
+            name: 'ACTIVE'
+    ]
+
+    transitions: [
+        Transition:
+            from: 'NORMAL'
+            to: 'ACTIVE'
+
+            SequentialAnimation:
+                ScriptAction:
+                    script ::
+                        ripple.opacity = 1
+                NumberAnimation: @radius_anim
+                    target: ripple
+                    props:
+                        radius: radius_max
+                    duration: radius_max / radius_anim_rate
+                    easing:
+                        type: Easing.OutQuad
+
+        Transition:
+            from: 'ACTIVE'
+            to: 'NORMAL'
+
+            ParallelAnimation:
+                NumberAnimation: @radius_tail_anim
+                    target: ripple
+                    props:
+                        radius: radius_max
+                    duration: radius_max / radius_tail_anim_rate
+                    easing:
+                        type: Easing.Linear
+                NumberAnimation: @opacity_anim
+                    target: ripple
+                    props:
+                        opacity: 0
+                    duration: opacity_anim_duration
+                    easing:
+                        type: Easing.InQuad
+    ]
+
+    def start(mouse):
+        ripple.state = 'ACTIVE'
+        ripple.readonly.centerx = mouse.x
+        ripple.centery = mouse.y
+
+    def stop():
+        ripple.state = 'NORMAL'
+
+    Connections:
+        target: ripple.parent
+
+        ignore_unknown_signals: True
+
+        on_pressed ::
+            root.start(mouse)
+
+        on_released ::
+            root.stop()
+
+        on_exited ::
+            root.stop()
+
+        on_canceled ::
+            root.stop()
+
+    Rectangle: @bglayer
+        style:
+            clip: True
+            color: 'transparent'
+            size: 'fill'
+
+        Rectangle: @circle
+            style:
+                pos: (root.readonly.centerx - root.radius,
+                      root.centery - root.radius)
+                size: ((v := root.readonly.diameter), v)
+                color: root.color
+                radius: root.radius
+
+""" How to use
+# launcher
+Application:
+    children:
+        size: 'fill'
+        inherit: True
+    Window:
+        MouseArea:
+            Ripple:
+                pass
+"""
