@@ -1,12 +1,24 @@
 from os import PathLike as _PathLike
 from typing import *
 
+from PySide6.QtQml import QJSValue as _QJSValue
+from lk_lambdex import lambdex as _lambdex
+
+_TFakeModule = _lambdex('', """
+    class FakeModule:
+        def __getattr__(self, item):
+            return None
+        def __call__(self, *args, **kwargs):
+            return None
+    return FakeModule()
+""")()
+
 if __name__ == '__main__':
     from declare_qtquick.widgets.base import Component as _Component
-    from declare_qtquick.properties import Property as _Property
+    from declare_qtquick.properties import base as _base_prop
 else:
     _Component = None
-    _Property = None
+    _base_prop = _TFakeModule
 
 # ------------------------------------------------------------------------------
 
@@ -16,11 +28,13 @@ TQid = str
 TName = str
 TFullName = str
 
-TLevel = int
-
 TPropName = str
-TProperty = _Property
-TProperties = Dict[TPropName, TProperty]
+TProperty = _base_prop.Property
+TPropertyGroup = _base_prop.PropertyGroup
+TProperties = Dict[TPropName, Union[TProperty, TPropertyGroup]]
+TBound = List[Tuple[TFullName, Optional[Callable]]]
+
+TLevel = int
 TComponent = _Component
 
 
@@ -31,8 +45,7 @@ class TsProperty:
     BindingArg0 = Union[TProperty, Iterable[TProperty]]
     BindingArg1 = Optional[Callable]
     Bool = bool
-    # Bound = List[Tuple[TProperty, BindingArg1]]
-    Bound = List[Tuple[TFullName, BindingArg1]]
+    Bound = TBound
     Color = str
     FullName = TFullName
     Name = TName
@@ -56,3 +69,30 @@ class TsContext:
     Context = List[Tuple[TComponent, 'Context']]
     IdChain = Dict[TLevel, int]
     Level = TLevel
+    Qid = TQid
+    QidList = List[TQid]
+
+
+class TsPySide:
+    Arg0 = Literal['', 'self', 'cls']
+    NArgs = int  # nargs: 'number of args', int == -1 or >= 0. -1 means
+    #   uncertain.
+    
+    PyClassName = str
+    PyFuncName = str
+    PyMethName = str
+    _RegisteredName = str  # usually this name is same with `TPyFuncName` or
+    #   `TPyMethName`, but you can define it with a custom name (something like
+    #   "alias").
+    
+    PyClassHolder = Dict[
+        PyClassName, Dict[
+            PyMethName, Tuple[_RegisteredName, NArgs]
+        ]
+    ]
+    
+    _PyFunction = Callable
+    PyFuncHolder = Dict[_RegisteredName, Tuple[_PyFunction, NArgs]]
+    
+    QVar = 'QVariant'
+    QVal = _QJSValue

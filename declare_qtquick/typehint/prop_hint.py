@@ -1,19 +1,10 @@
 from .type_hint import Union
+from .type_hint import _TFakeModule
 
 if __name__ == '__main__':
     from declare_qtquick.properties import normal_properties as _norm_prop
     from declare_qtquick.properties import Property as _Property
 else:
-    from lk_lambdex import lambdex as _lambdex
-    
-    _TFakeModule = _lambdex('', """
-        class FakeModule:
-            def __getattr__(self, item):
-                return None
-            def __call__(self, *args, **kwargs):
-                return None
-        return FakeModule()
-    """)()
     _norm_prop = _TFakeModule
     _Property = None
 
