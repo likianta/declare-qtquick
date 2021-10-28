@@ -1,0 +1,5 @@
+/.idea/
+/deleted/
+/tests/
+__pycache__
+*.pyc
