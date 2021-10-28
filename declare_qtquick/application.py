@@ -1,3 +1,4 @@
+import os
 import os.path as xpath
 
 from PySide6.QtCore import QObject
@@ -147,21 +148,26 @@ class Application:
         return self
     
     def __exit__(self, exc_type, exc_val, exc_tb):
-        file = self.build()
-        self.start(file)
+        # noinspection PyUnusedLocal
+        # file = self.build(
+        #     os.getcwd() + '/' + '__declare_qtquick_autogen__' + '.qml'
+        # )
+        # self.start(file)
+        pass
     
-    def build(self) -> str:
-        # TODO: build qml tree
-        from .control import ctx_mgr
-        from .typehint import TsContext
-
-        def _dump_loop(node: TsContext.Context, level: int):
-            for parent, children in node:
-                yield level, parent
-                yield from _dump_loop(children)
+    @staticmethod
+    def build(file):
+        from .builder import build_component
+        from .control import id_mgr
+        from .control import id_gen
         
-        for level, comp in _dump_loop(ctx_mgr.dump(), 0):
-            pass
+        id_mgr.finalized()
+        
+        qml = build_component(id_mgr.get_component(id_gen.root_id), level=0)
+        with open(file, 'w', encoding='utf-8') as f:
+            f.write(qml)
+        
+        return file
     
     @staticmethod
     def start(qmlfile: TPath):
