@@ -20,6 +20,7 @@ TLevel = int
 
 TPropName = str
 TProperty = _Property
+TProperties = Dict[TPropName, TProperty]
 TComponent = _Component
 
 
@@ -29,12 +30,14 @@ class TsProperty:
     Any = Any
     BindingArg0 = Union[TProperty, Iterable[TProperty]]
     BindingArg1 = Optional[Callable]
+    Bool = bool
     # Bound = List[Tuple[TProperty, BindingArg1]]
     Bound = List[Tuple[TFullName, BindingArg1]]
     Color = str
     FullName = TFullName
     Name = TName
     Number = Union[int, float]
+    Properties = TProperties
     Qid = TQid
     String = str
 
@@ -43,7 +46,7 @@ class TsComponent:
     Component = TComponent
     FullName = TFullName
     Name = TName
-    Properties = Dict[TPropName, TProperty]
+    Properties = TProperties
     Qid = TQid
 
 

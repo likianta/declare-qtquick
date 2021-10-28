@@ -1,3 +1,4 @@
+from .__external__ import PropGetterAndSetter
 from .__external__ import TsProperty as T
 
 
@@ -18,6 +19,8 @@ class Property:
             self.value = arg_0.value
         else:
             self.value = arg_0
+    
+    set = kiss  # alias (this is more popular to use)
     
     def bind(self, arg_0: T.BindingArg0, arg_1: T.BindingArg1 = None):
         """ Property binding.
@@ -47,3 +50,23 @@ class Property:
     @property
     def fullname(self) -> T.FullName:
         return f'{self.qid}.{self.name}'
+
+
+class PropertyGroup(Property, PropGetterAndSetter):
+    
+    def __init__(self, qid: T.Qid, name: T.Name):
+        Property.__init__(self, qid, name)
+        PropGetterAndSetter.__init__(self)
+        del self.value
+    
+    def kiss(self, arg_0):
+        raise NotImplemented(
+            'PropertyGroup doesnt support `kiss` method. '
+            'You can only call its sub property to set values.'
+        )
+    
+    def bind(self, *args):
+        raise NotImplemented(
+            'PropertyGroup doesnt support `bind` method. '
+            'You can only call its sub property to bind values.'
+        )

@@ -1,7 +1,7 @@
 from textwrap import dedent
 from textwrap import indent
 
-from declare_qtquick.typehint import TsComponent as T
+from .typehint import TsComponent as T
 
 
 def build_component(comp: T.Component, level=0) -> str:

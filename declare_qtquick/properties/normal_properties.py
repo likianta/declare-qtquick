@@ -2,22 +2,29 @@ from .__external__ import TsProperty as T
 from .base import Property
 
 
-class ColorProp(Property):
+class Boolean(Property):
+    value: T.Bool
+    
+    def __init__(self, qid, name, default_value=False):
+        super().__init__(qid, name, default_value)
+
+
+class Color(Property):
     value: T.Color
     
-    def __init__(self, qid: T.Qid, name: T.Name, default_value=''):
+    def __init__(self, qid, name, default_value=''):
         super().__init__(qid, name, default_value)
 
 
-class NumberProp(Property):
+class Number(Property):
     value: T.Number
     
-    def __init__(self, qid: T.Qid, name: T.Name, default_value=0):
+    def __init__(self, qid, name, default_value=0):
         super().__init__(qid, name, default_value)
 
 
-class StringProp(Property):
+class String(Property):
     value: T.String
     
-    def __init__(self, qid: T.Qid, name: T.Name, default_value=''):
+    def __init__(self, qid, name, default_value=''):
         super().__init__(qid, name, default_value)

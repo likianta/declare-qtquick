@@ -1,5 +1,5 @@
-from .__external__ import NumberProp
-from .__external__.prophint import PItem
+from .__external__ import Number
+from .__external__ import PItem
 from .base import Component
 
 
@@ -9,10 +9,10 @@ class Item(Component, PItem):
     def __init__(self):
         super().__init__()
         self.properties.update({
-            'x'      : NumberProp(self.qid, 'x', 0),
-            'y'      : NumberProp(self.qid, 'y', 0),
-            'z'      : NumberProp(self.qid, 'z', 0),
-            'width'  : NumberProp(self.qid, 'width', 0),
-            'height' : NumberProp(self.qid, 'height', 0),
-            'opacity': NumberProp(self.qid, 'opacity', 0.0),
+            'x'      : Number(self.qid, 'x', 0),
+            'y'      : Number(self.qid, 'y', 0),
+            'z'      : Number(self.qid, 'z', 0),
+            'width'  : Number(self.qid, 'width', 0),
+            'height' : Number(self.qid, 'height', 0),
+            'opacity': Number(self.qid, 'opacity', 0.0),
         })
