@@ -1,5 +1,4 @@
 try:
-    from .. import typehint
-    from ..typehint import *
+    from ..typehint import TsProperty
 except ImportError as e:
     raise e

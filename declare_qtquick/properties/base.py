@@ -1,4 +1,4 @@
-from declare_qtquick.typehint import TsProperty as T
+from .__external__ import TsProperty as T
 
 
 class Property:

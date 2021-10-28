@@ -1,4 +1,3 @@
-from . import prophint
 from .base import Property
 from .normal_properties import ColorProp
 from .normal_properties import NumberProp
