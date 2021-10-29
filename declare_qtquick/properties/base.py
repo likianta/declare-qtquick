@@ -9,6 +9,17 @@ class Property:
     value: T.Any
     
     def __init__(self, qid: T.Qid, name: T.Name, default_value=None):
+        """
+        
+        Args:
+            qid:
+            name:
+            default_value: Optional[Any]
+                None: no value defined, it won't be generated to QML layout.
+                      See the process logic in: `..builder.build_properties`.
+                It is suggested that the subclasses do not modify default_value
+                in its __init__ method.
+        """
         self.qid = qid
         self.name = name
         self.bound = []

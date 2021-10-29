@@ -8,6 +8,6 @@ class Text(Item, PText):
     def __ready__(self):
         super().__ready__()
         self.properties.update({
-            'color': Color(self.qid, 'color', '#000000'),
-            'text' : Number(self.qid, 'text', ''),
+            'color': Color(self.qid, 'color'),
+            'text' : String(self.qid, 'text', ''),
         })

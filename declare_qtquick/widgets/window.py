@@ -8,5 +8,6 @@ class Window(Item, PWindow):
     def __ready__(self):
         super().__ready__()
         self.properties.update({
-            'color': Color(self.qid, 'color', '#000000'),
+            'color': Color(self.qid, 'color'),
         })
+        self.__setprop__('visible', True)
