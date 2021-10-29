@@ -44,17 +44,22 @@ def build_component(comp: TComponent, level=0) -> str:
     return _loop(comp, level=level)
 
 
-def build_properties(props: TProperties):
+def build_properties(props: TProperties, group_name=''):
     for name, prop in props.items():
         # note prop type is Union[TProperty, TPropertyGroup], we should check
         # its type first.
         if isinstance(prop, PropertyGroup):
-            yield from build_connections(prop.properties)
+            yield from build_properties(prop.properties, prop.name)
         elif prop.value is None:
             continue
         else:
             # yield name, prop.value
-            yield '{}: {}'.format(_convert_name_case(name), prop.adapt())
+            if group_name:
+                yield '{}.{}: {}'.format(
+                    group_name, _convert_name_case(name), prop.adapt()
+                )
+            else:
+                yield '{}: {}'.format(_convert_name_case(name), prop.adapt())
 
 
 def build_connections(props: TProperties):
