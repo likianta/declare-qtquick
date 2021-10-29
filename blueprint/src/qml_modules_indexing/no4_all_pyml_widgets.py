@@ -1,9 +1,9 @@
+import re
 from collections import defaultdict
 
-import re
 from lk_utils import read_and_write
 
-from blueprint.typehint import *
+from blueprint.src.qml_modules_indexing.typehint import *
 
 
 def main(file_i, file_o):
@@ -96,7 +96,6 @@ def _camel_2_snake_case(name: str):
 
 
 if __name__ == '__main__':
-    main(
-        '../resources/no5_all_qml_widgets.json',
-        '../resources/no6_all_pyml_widgets.json'
-    )
+    from blueprint.src.qml_modules_indexing import io
+    
+    main(*io.no4)

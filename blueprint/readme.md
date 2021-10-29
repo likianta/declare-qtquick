@@ -20,13 +20,15 @@ this work is done, be notice that there're some inconvinience listed below:
 - lk-logger
 - lk-utils
 
+Resources preparation see `./src/qml_modules_indexing/io.py:docstring`.
+
 # How to Use
 
 To generate structured data from `resources/*.html` to `resouces/*.json`, run
 this script:
 
 ```
-cd qml_modules_indexing
+cd src/qml_modules_indexing
 python main.py
 ```
 
@@ -34,6 +36,6 @@ To generate `declare-qtquick` modules from `resouces/*.json`
 to `declare-qtquick/widgets/*`, run this script:
 
 ```
-cd template_generator
+cd src/template_generator
 python main.py
 ```

@@ -1,9 +1,3 @@
-"""
-Requirements:
-    如需运行本模块, 请先安装 Qt 5.0+ (推荐 5.15) 完整版.
-    本模块所用到的离线文件读取自:
-        "{YourQtProgram}/Docs/Qt-{version}/qtdoc/modules-qml.html".
-"""
 from bs4 import BeautifulSoup
 from lk_utils import read_and_write
 
@@ -176,5 +170,6 @@ def _correct_module_lettercase(module: str, words: list) -> str:
 
 
 if __name__ == '__main__':
-    main('../resources/no1_all_qml_modules.html',
-         '../resources/no2_all_qml_modules.json')
+    from blueprint.src.qml_modules_indexing import io
+    
+    main(*io.no1)

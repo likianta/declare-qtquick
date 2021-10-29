@@ -154,6 +154,6 @@ def _get_files(data: dict, dir_i: str):
 
 
 if __name__ == '__main__':
-    main('../resources/no4_all_qml_types.json',
-         '../resources/no5_all_qml_widgets.json',
-         'E:/programs/qt/qt6/Docs/Qt-6.1.3')
+    from blueprint.src.qml_modules_indexing import io
+    
+    main(*io.no3, io.qtdoc_dir)

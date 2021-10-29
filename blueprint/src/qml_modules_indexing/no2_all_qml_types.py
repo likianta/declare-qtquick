@@ -108,7 +108,7 @@ def main(file_i, file_o):
 
 # ------------------------------------------------------------------------------
 
-qml_modules = read_and_write.loads('../resources/no2_all_qml_modules.json')
+qml_modules = read_and_write.loads('../../resources/qtdoc_compiled/1_all_qml_modules.json')
 qml_modules = qml_modules['module_group'] | qml_modules['module']  # type: dict
 qml_modules.update({  # 扩充
     ''                        : '',
@@ -153,5 +153,6 @@ def _correct_module_lettercase(module: str):
 
 
 if __name__ == '__main__':
-    main('../resources/no3_all_qml_types.html',
-         '../resources/no4_all_qml_types.json')
+    from blueprint.src.qml_modules_indexing import io
+    
+    main(*io.no2)

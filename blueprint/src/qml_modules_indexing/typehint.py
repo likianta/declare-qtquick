@@ -6,8 +6,9 @@ TPackageName = str  # e.g. 'QtQuick.Controls'
 
 TProperty = str  # e.g. 'border', 'border.color', 'width', 'height', ...
 
-TQType = Literal['array', 'bool', 'color', 'group', 'int', 'real', 'string',
-                 'var']
+TQType = Literal[
+    'array', 'bool', 'color', 'group', 'int', 'real', 'string', 'var'
+]
 TQmlType = str
 
 
