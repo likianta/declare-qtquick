@@ -154,6 +154,6 @@ def _get_files(data: dict, dir_i: str):
 
 
 if __name__ == '__main__':
-    from blueprint.src.qml_modules_indexing import io
-    
+    from blueprint.src import io
+
     main(*io.no3, io.qtdoc_dir)

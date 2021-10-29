@@ -3,7 +3,7 @@ from collections import defaultdict
 
 from lk_utils import read_and_write
 
-from blueprint.src.qml_modules_indexing.typehint import *
+from blueprint.src.typehint import *
 
 
 def main(file_i, file_o):
@@ -96,6 +96,6 @@ def _camel_2_snake_case(name: str):
 
 
 if __name__ == '__main__':
-    from blueprint.src.qml_modules_indexing import io
-    
+    from blueprint.src import io
+
     main(*io.no4)

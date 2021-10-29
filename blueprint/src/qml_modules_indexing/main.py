@@ -5,7 +5,7 @@
 * component: 组件名. 例如: 'Item', 'Rectangle', 'MouseArea'
 * props: 组件属性. 例如: 'border', 'border.width', 'color'
 """
-from blueprint.src.qml_modules_indexing import io
+from blueprint.src import io
 from blueprint.src.qml_modules_indexing import no1_all_qml_modules
 from blueprint.src.qml_modules_indexing import no2_all_qml_types
 from blueprint.src.qml_modules_indexing import no3_all_qml_widgets

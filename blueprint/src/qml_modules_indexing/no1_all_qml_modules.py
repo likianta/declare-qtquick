@@ -170,6 +170,6 @@ def _correct_module_lettercase(module: str, words: list) -> str:
 
 
 if __name__ == '__main__':
-    from blueprint.src.qml_modules_indexing import io
-    
+    from blueprint.src import io
+
     main(*io.no1)
