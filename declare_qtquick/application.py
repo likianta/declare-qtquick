@@ -1,4 +1,3 @@
-import os
 import os.path as xpath
 
 from PySide6.QtCore import QObject
@@ -156,7 +155,7 @@ class Application:
         pass
     
     @staticmethod
-    def build(file):
+    def build(output_file):
         from .builder import build_component
         from .control import id_mgr
         from .control import id_gen
@@ -164,10 +163,10 @@ class Application:
         id_mgr.finalized()
         
         qml = build_component(id_mgr.get_component(id_gen.root_id), level=0)
-        with open(file, 'w', encoding='utf-8') as f:
+        with open(output_file, 'w', encoding='utf-8') as f:
             f.write(qml)
         
-        return file
+        return output_file
     
     @staticmethod
     def start(qmlfile: TPath):

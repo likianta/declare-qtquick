@@ -1,4 +1,4 @@
-> 📝 English document is on the way. See Chinese version below.
+> 📝 English documentation is on the way. See Chinese version below.
 
 # Declare QtQuick | 声明式 QtQuick 界面库
 
