@@ -1,0 +1,1 @@
+from {RELATIVE_DOTS}.base import Component

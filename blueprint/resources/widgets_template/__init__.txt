@@ -1,0 +1,3 @@
+from __declare_qtquick_qml_imports__ import qml_imports
+qml_imports.add("{QMLTYPE}")
+from .__list__ import *
