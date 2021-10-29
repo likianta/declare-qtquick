@@ -16,13 +16,10 @@ def build_component(comp: TComponent, level=0) -> str:
                 {widget_name} {{
                     id: {qid}
                     
-                    // Properties
                     {properties}
                     
-                    // Connections
                     {connections}
                     
-                    // Children
                     {children}
                 }}
             ''').rstrip().format(
@@ -31,11 +28,11 @@ def build_component(comp: TComponent, level=0) -> str:
                 properties=indent(
                     '\n'.join(build_properties(comp.properties)),
                     '    '
-                ).lstrip() or '// NO_PROPERTIES_DEFINED',
+                ).lstrip() or '// NO_PROPERTY_DEFINED',
                 connections=indent(
                     '\n'.join(build_connections(comp.properties)),
                     '    '
-                ).lstrip() or '// NO_CONNECTIONS_DEFINED',
+                ).lstrip() or '// NO_CONNECTION_DEFINED',
                 children='\n\n'.join(
                     _loop(x, level + 4).lstrip()
                     for x in id_mgr.get_children(comp.qid)
@@ -53,6 +50,8 @@ def build_properties(props: TProperties):
         # its type first.
         if isinstance(prop, PropertyGroup):
             yield from build_connections(prop.properties)
+        elif prop.value is None:
+            continue
         else:
             # yield name, prop.value
             yield '{}: {}'.format(_convert_name_case(name), prop.adapt())
