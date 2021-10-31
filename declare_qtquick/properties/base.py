@@ -1,10 +1,10 @@
-from .__external__ import PropGetterAndSetter
-from .__external__ import TsProperty as T
+from .__ext__ import PropGetterAndSetter
+from .__ext__ import T
 
 
 class Property:
     qid: T.Qid
-    name: T.Name
+    name: T.PropName
     bound: T.Bound
     value: T.Any
     
@@ -61,26 +61,46 @@ class Property:
     def fullname(self) -> T.FullName:
         return f'{self.qid}.{self.name}'
     
-    def adapt(self):
+    def adapt(self) -> str:
         """ Convert python type to qml type. """
-        return self.value
+        return str(self.value)
 
 
-class PropertyGroup(Property, PropGetterAndSetter):
+class PropertyGroup(PropGetterAndSetter):
+    qid: T.Qid
+    # overwrite this value in subclass level.
+    # see typical usage in `.group_properties.Anchors`.
+    name: T.GroupName
     
-    def __init__(self, qid: T.Qid, name: T.Name):
-        Property.__init__(self, qid, name)
+    # _properties: T.Properties  # came from super class.
+    
+    def __init__(self, qid: T.Qid, *_):
         PropGetterAndSetter.__init__(self)
-        del self.value
+        self.qid = qid
+        from .prop_sheet.base import init_prop_sheet
+        init_prop_sheet(self, prefix=self.name)
     
-    def kiss(self, arg_0):
-        raise NotImplemented(
+    def kiss(self, _):
+        raise Exception(
             'PropertyGroup doesnt support `kiss` method. '
             'You can only call its sub property to set values.'
         )
     
-    def bind(self, *args):
-        raise NotImplemented(
+    set = kiss
+    
+    def bind(self, *_):
+        raise Exception(
             'PropertyGroup doesnt support `bind` method. '
             'You can only call its sub property to bind values.'
         )
+    
+    @property
+    def fullname(self) -> T.FullName:
+        return f'{self.qid}.{self.name}'
+
+    @property
+    def properties(self):
+        return self._properties
+
+    def adapt(self) -> str:
+        return self.fullname
