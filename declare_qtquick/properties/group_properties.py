@@ -62,9 +62,11 @@ class Anchors(PropertyGroup, PsAnchors):
     
     def __setprop__(self, key, value):
         if key == 'center_in' or key == 'fill':
-            # assert isinstance(value, Property)
+            from ..widgets.api.qtquick import Window
             if isinstance(value, str):
                 self._properties[key].set(value)
+            elif isinstance(value, Window):
+                self._properties[key].set(value.content_item)
             else:
                 self._properties[key].set(value.qid)
         elif key == 'margins' or key.endswith('_margin'):
