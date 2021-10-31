@@ -10,39 +10,38 @@ from .typehint import *
 
 
 def build_component(comp: TComponent, level=0) -> str:
-    def _loop(comp: TComponent, level: int):
-        # assert level % 4 == 0
-        return indent(
-            dedent('''
-                {widget_name} {{
-                    id: {qid}
-                    
-                    {properties}
-                    
-                    {connections}
-                    
-                    {children}
-                }}
-            ''').rstrip().format(
-                widget_name=comp.widget_name,
-                qid=comp.qid,
-                properties=indent(
-                    '\n'.join(build_properties(comp.properties)),
-                    '    '
-                ).lstrip() or '// NO_PROPERTY_DEFINED',
-                connections=indent(
-                    '\n'.join(build_connections(comp.properties)),
-                    '    '
-                ).lstrip() or '// NO_CONNECTION_DEFINED',
-                children='\n\n'.join(
-                    _loop(x, level + 4).lstrip()
-                    for x in id_mgr.get_children(comp.qid)
-                ) or '// NO_CHILDREN_DEFINED',
-            ),
-            ' ' * level
+    # assert level % 4 == 0
+    
+    def _loop(comp: TComponent):
+        return dedent('''
+            {widget_name} {{
+                id: {qid}
+                
+                {properties}
+                
+                {connections}
+                
+                {children}
+            }}
+        ''').strip().format(
+            widget_name=comp.widget_name,
+            qid=comp.qid,
+            properties=indent(
+                '\n'.join(build_properties(comp.properties)),
+                '    '
+            ).lstrip() or '// NO_PROPERTY_DEFINED',
+            connections=indent(
+                '\n'.join(build_connections(comp.properties)),
+                '    '
+            ).lstrip() or '// NO_CONNECTION_DEFINED',
+            children=indent(
+                '\n\n'.join(map(_loop, id_mgr.get_children(comp.qid))),
+                '    '
+            ).lstrip() or '// NO_CHILD_DEFINED',
         )
     
-    return _loop(comp, level=level)
+    out = indent(_loop(comp), ' ' * level)
+    return out
 
 
 def build_properties(props: TProperties, group_name=''):
