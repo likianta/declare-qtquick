@@ -1,0 +1,209 @@
+{
+    "anchors": {
+        "align_when_centered": "bool",
+        "baseline": "AnchorLine",
+        "baseline_offset": "real",
+        "bottom": "AnchorLine",
+        "bottom_margin": "real",
+        "center_in": "Item",
+        "fill": "Item",
+        "horizontal_center": "AnchorLine",
+        "horizontal_center_offset": "real",
+        "left": "AnchorLine",
+        "left_margin": "real",
+        "margins": "real",
+        "right": "AnchorLine",
+        "right_margin": "real",
+        "top": "AnchorLine",
+        "top_margin": "real",
+        "vertical_center": "AnchorLine",
+        "vertical_center_offset": "real"
+    },
+    "axis": {
+        "x": "real",
+        "y": "real",
+        "z": "real"
+    },
+    "border": {
+        "bottom": "int",
+        "color": "color",
+        "left": "int",
+        "right": "int",
+        "top": "int",
+        "width": "int"
+    },
+    "children_rect": {
+        "height": "real",
+        "width": "real",
+        "x": "real",
+        "y": "real"
+    },
+    "down": {
+        "hovered": "bool",
+        "implicit_indicator_height": "real",
+        "implicit_indicator_width": "real",
+        "indicator": "Item",
+        "pressed": "bool"
+    },
+    "drag": {
+        "active": "bool",
+        "axis": "enumeration",
+        "filter_children": "bool",
+        "maximum_x": "real",
+        "maximum_y": "real",
+        "minimum_x": "real",
+        "minimum_y": "real",
+        "smoothed": "bool",
+        "source": "Object",
+        "target": "Item",
+        "threshold": "real",
+        "x": "qreal",
+        "y": "qreal"
+    },
+    "easing": {
+        "amplitude": "real",
+        "bezier_curve": "list<real>",
+        "overshoot": "real",
+        "period": "real",
+        "type": "enumeration"
+    },
+    "first": {
+        "handle": "Item",
+        "hovered": "bool",
+        "implicit_handle_height": "real",
+        "implicit_handle_width": "real",
+        "position": "real",
+        "pressed": "bool",
+        "value": "real",
+        "visual_position": "real"
+    },
+    "font": {
+        "bold": "bool",
+        "capitalization": "enumeration",
+        "family": "string",
+        "hinting_preference": "enumeration",
+        "italic": "bool",
+        "kerning": "bool",
+        "letter_spacing": "real",
+        "pixel_size": "int",
+        "point_size": "real",
+        "prefer_shaping": "bool",
+        "strikeout": "bool",
+        "style_name": "string",
+        "underline": "bool",
+        "weight": "int",
+        "word_spacing": "real"
+    },
+    "font_info": {
+        "bold": "bool",
+        "family": "string",
+        "italic": "bool",
+        "pixel_size": "string",
+        "point_size": "real",
+        "style_name": "string",
+        "weight": "int"
+    },
+    "icon": {
+        "cache": "bool",
+        "color": "color",
+        "height": "int",
+        "mask": "bool",
+        "name": "string",
+        "source": "url",
+        "width": "int"
+    },
+    "layer": {
+        "effect": "Component",
+        "enabled": "bool",
+        "format": "enumeration",
+        "mipmap": "bool",
+        "sampler_name": "string",
+        "samples": "enumeration",
+        "smooth": "bool",
+        "source_rect": "rect",
+        "texture_mirroring": "enumeration",
+        "texture_size": "size",
+        "wrap_mode": "enumeration"
+    },
+    "origin": {
+        "x": "real",
+        "y": "real"
+    },
+    "pinch": {
+        "active": "bool",
+        "drag_axis": "enumeration",
+        "maximum_rotation": "real",
+        "maximum_scale": "real",
+        "maximum_x": "real",
+        "maximum_y": "real",
+        "minimum_rotation": "real",
+        "minimum_scale": "real",
+        "minimum_x": "real",
+        "minimum_y": "real",
+        "target": "Item"
+    },
+    "second": {
+        "handle": "Item",
+        "hovered": "bool",
+        "implicit_handle_height": "real",
+        "implicit_handle_width": "real",
+        "position": "real",
+        "pressed": "bool",
+        "value": "real",
+        "visual_position": "real"
+    },
+    "section": {
+        "criteria": "enumeration",
+        "delegate": "Component",
+        "label_positioning": "enumeration",
+        "property": "string"
+    },
+    "selected_name_filter": {
+        "extensions": "list<string>",
+        "index": "int",
+        "name": "string"
+    },
+    "swipe": {
+        "behind": "Component",
+        "behind_item": "Item",
+        "complete": "bool",
+        "enabled": "bool",
+        "left": "Component",
+        "left_item": "Item",
+        "position": "real",
+        "right": "Component",
+        "right_item": "Item",
+        "transition": "Transition"
+    },
+    "target_property": {
+        "name": "string",
+        "object": "Object"
+    },
+    "up": {
+        "hovered": "bool",
+        "implicit_indicator_height": "real",
+        "implicit_indicator_width": "real",
+        "indicator": "Item",
+        "pressed": "bool"
+    },
+    "visible_area": {
+        "height_ratio": "real",
+        "width_ratio": "real",
+        "x_position": "real",
+        "y_position": "real"
+    },
+    "word_candidate_list": {
+        "always_visible": "bool",
+        "auto_hide_delay": "int"
+    },
+    "x_axis": {
+        "enabled": "bool",
+        "maximum": "real",
+        "minimum": "real"
+    },
+    "y_axis": {
+        "enabled": "bool",
+        "maximum": "real",
+        "minimum": "real"
+    }
+}
