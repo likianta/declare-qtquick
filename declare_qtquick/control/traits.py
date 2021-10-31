@@ -1,18 +1,21 @@
+import re
+
 from .__ext__ import TsTraits as T
 
 ENUMS = '_enumerations'
 PROPS = '_properties'
+SIGNALS = '_signals'
 
 
 class _BaseClass:
     pass
 
 
-def regular_setattr(self, name, value):
+def base_setattr(self, name, value):
     _BaseClass.__setattr__(self, name, value)
 
-    
-def regular_getattr(self, name):
+
+def base_getattr(self, name):
     return _BaseClass.__getattribute__(self, name)
 
 
@@ -27,11 +30,11 @@ class ConstantEnumeration:
     def __getattr__(self, key: str):
         if key == ENUMS:
             try:
-                return regular_getattr(self, ENUMS)
+                return base_getattr(self, ENUMS)
             except AttributeError:
                 return ()
         elif key.startswith('_'):
-            return regular_getattr(self, key)
+            return base_getattr(self, key)
         
         if key in self._enumerations:
             return self.__getenum__(key)
@@ -43,16 +46,16 @@ class ConstantEnumeration:
             if self._enumerations:
                 raise AttributeError('ConstantEnumeration is immutable!')
             else:
-                regular_setattr(self, ENUMS, value)
+                base_setattr(self, ENUMS, value)
                 return
         elif key.startswith('_'):
-            regular_setattr(self, key, value)
+            base_setattr(self, key, value)
             return
         
         if key in self._enumerations:
             self.__setenum__(key, value)
         else:
-            regular_setattr(self, key, value)
+            base_setattr(self, key, value)
     
     def __getenum__(self, key: str):
         return self._enumerations[key]
@@ -71,11 +74,11 @@ class PropGetterAndSetter:
     def __getattr__(self, key: str):
         if key == PROPS:
             try:
-                return regular_getattr(self, PROPS)
+                return base_getattr(self, PROPS)
             except AttributeError:
                 return ()
         elif key.startswith('_'):
-            return regular_getattr(self, key)
+            return base_getattr(self, key)
         
         if key in self._properties:
             return self.__getprop__(key)
@@ -84,16 +87,63 @@ class PropGetterAndSetter:
     
     def __setattr__(self, key: str, value):
         if key == PROPS or key.startswith('_'):
-            regular_setattr(self, key, value)
+            base_setattr(self, key, value)
             return
         
         if key in self._properties:
             self.__setprop__(key, value)
         else:
-            regular_setattr(self, key, value)
+            base_setattr(self, key, value)
     
     def __getprop__(self, key):
         return self._properties[key]
     
     def __setprop__(self, key, value):
         self._properties[key].set(value)
+
+
+class SignalHandler:
+    _signals: T.Signals
+    _signal_pattern = re.compile(r'^on_\w+ed$')
+    
+    def __init__(self):
+        self._signals = {}
+    
+    def _is_signal(self, item: str):
+        return bool(self._signal_pattern.match(item))
+    
+    def _signal_factory(self, key):
+        raise NotImplementedError
+    
+    def __getattr__(self, key: str):
+        if key == SIGNALS:
+            try:
+                return base_getattr(self, SIGNALS)
+            except AttributeError:
+                return ()
+        elif key.startswith('_'):
+            return base_getattr(self, key)
+        
+        if key in self._signals:
+            return self.__getsignal__(key)
+        elif self._is_signal(key):
+            signal = self._signals[key] = self._signal_factory(key)
+            return signal
+        else:
+            return self.__getattribute__(key)
+    
+    def __setattr__(self, key: str, value):
+        if key == SIGNALS or key.startswith('_'):
+            base_setattr(self, key, value)
+            return
+        
+        if key in self._signals:
+            self.__setsignal__(key, value)
+        else:
+            base_setattr(self, key, value)
+    
+    def __getsignal__(self, key: str):
+        return self._signals[key]
+    
+    def __setsignal__(self, key, value):
+        raise AttributeError('Signal is immutable!')

@@ -21,6 +21,8 @@ def build_component(comp: TComponent, level=0) -> str:
                 
                 {connections}
                 
+                {signals}
+                
                 {children}
             }}
         ''').strip().format(
@@ -34,6 +36,10 @@ def build_component(comp: TComponent, level=0) -> str:
                 '\n'.join(build_connections(comp.properties)),
                 '    '
             ).lstrip() or '// NO_CONNECTION_DEFINED',
+            signals=indent(
+                '\n'.join(build_signals(comp.signals)),
+                '    '
+            ).lstrip() or '// NO_SIGNAL_DEFINED',
             children=indent(
                 '\n\n'.join(map(_loop, id_mgr.get_children(comp.qid))),
                 '    '
@@ -84,3 +90,11 @@ def build_connections(props: TProperties):
                         random_id,
                         list(map(convert_name_case, notifier_name))
                     )
+
+
+def build_signals(signals: TSignals):
+    for name, signal in signals.items():
+        yield '{}: {}'.format(
+            convert_name_case(name),
+            signal.adapt()
+        )

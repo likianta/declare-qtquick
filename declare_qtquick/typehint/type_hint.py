@@ -29,11 +29,16 @@ TPath = Union[str, _PathLike]
 TQid = str
 TName = str
 TFullName = str
-
 TPropName = str
+TSignalName = str
+
 TProperty = _base_prop.Property
 TPropertyGroup = _base_prop.PropertyGroup
+TSignal = _base_prop.Signal
+
 TProperties = Dict[TPropName, Union[TProperty, TPropertyGroup]]
+TSignals = Dict[TSignalName, TSignal]
+
 TBound = List[Tuple[TFullName, Optional[Callable]]]
 
 TLevel = int
@@ -41,7 +46,6 @@ TComponent = _Component
 
 
 # ------------------------------------------------------------------------------
-
 
 class TsComponent:
     Component = TComponent
@@ -127,3 +131,4 @@ class TsPySide:
 class TsTraits:
     Properties = TProperties
     Enumerations = Dict[str, Union[int, float, bool, str]]
+    Signals = Dict[str, Callable]

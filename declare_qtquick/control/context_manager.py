@@ -36,7 +36,7 @@ class ContextManager:
             ^-3------------^
             1. self._node = temp
             3. self._root
-            ~. self._node_history = [#4, #2]
+            ~. self._node_history = [#3, #2]
         '''
 
         self._id_gen.upgrade()

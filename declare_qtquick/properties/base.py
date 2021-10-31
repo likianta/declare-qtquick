@@ -1,6 +1,8 @@
 from .__ext__ import PropGetterAndSetter
 from .__ext__ import T
 
+__all__ = ['Property', 'PropertyGroup', 'Signal']
+
 
 class Property:
     qid: T.Qid
@@ -105,10 +107,33 @@ class PropertyGroup(PropGetterAndSetter):
     @property
     def fullname(self) -> T.FullName:
         return f'{self.qid}.{self.name}'
-
+    
     @property
     def properties(self):
         return self._properties
-
+    
     def adapt(self) -> str:
         return self.fullname
+
+
+class Signal:
+    qid: T.Qid
+    name: T.Name
+    func: T.Any
+    
+    def __init__(self, qid: T.Qid, name: T.Name):
+        self.qid = qid
+        self.name = name
+    
+    def connect(self, func):
+        # from ..common import aslambda  # TODO
+        self.func = func
+    
+    def emit(self, *args, **kwargs):
+        self.func(*args, **kwargs)
+    
+    def adapt(self) -> str:
+        from ..pyside import pyside
+        func_id = str(id(self.func))
+        pyside.register(self.func, name=func_id)
+        return 'pyside.call("{}")'.format(func_id)

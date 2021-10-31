@@ -165,7 +165,7 @@ class Application:
         qml = build_component(id_mgr.get_component(id_gen.root_id), level=0)
         with open(output_file, 'w', encoding='utf-8') as f:
             # f.write(qml)
-            f.write('import QtQuick' + '\n' + qml)  # TEST
+            f.write('import QtQuick\nimport QtQuick.Controls' + '\n\n' + qml)  # TEST
         
         return output_file
     
