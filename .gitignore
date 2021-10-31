@@ -1,5 +1,6 @@
 /.idea/
 /deleted/
+/examples/view.qml
 /tests/
 __pycache__
 *.pyc
