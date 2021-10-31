@@ -1,9 +1,3 @@
-"""
-Requirements:
-    如需运行本模块, 请先安装 Qt 5.0+ (推荐 5.15) 完整版.
-    本模块所用到的离线文件读取自:
-        "{YourQtProgram}/Docs/Qt-{version}/qtdoc/qmltypes.html".
-"""
 import re
 from collections import defaultdict
 
@@ -11,14 +5,15 @@ from bs4 import BeautifulSoup
 from lk_logger import lk
 from lk_utils import read_and_write
 
+from blueprint.src import io
+
 
 def main(file_i, file_o):
     """
     
     Args:
-        file_i: '~/blueprint/resources/no3_all_qml_types.html'. 该文件被我事先从
-            "{YourQtProgram}/Docs/Qt-{version}/qtdoc/qmltypes.html" 拷贝过来.
-        file_o: 生成文件. "~/blueprint/resources/no3_all_qml_types.json"
+        file_i:
+        file_o:
             {module_group: {module: {type_name: path}, ...}, ...}
             #   {模组: {模块: {类型: 路径}}}
             e.g. {
@@ -43,7 +38,7 @@ def main(file_i, file_o):
         2. 其中 "~/Docs/Qt-{version}/qtdoc/qmltypes.html" 列出了全部的 qml types
         3. 我们对 "qmltypes.html" 用 BeautifulSoup 解析, 从中获取每个 qml types
            和它的链接, 最终我们将得到这些信息: 模组, 模块, 类型, 路径等
-        4. 将这些信息保存到本项目下的 "~/resources/qmltypes.json" 文件中
+        4. 将这些信息保存到本项目下的 "~/qmltypes.json" 文件中
     """
     soup = BeautifulSoup(read_and_write.read_file(file_i), 'html.parser')
     
@@ -80,9 +75,9 @@ def main(file_i, file_o):
         path = match.group(0).lstrip('../')
         #   -> 'qtdatavisualization/qml-qtdatavisualization-abstract3dseries
         #   .html'
-        module_group = _correct_module_lettercase(module_group)
+        module_group = correct_module_lettercase(module_group)
         #   'qtdatavisualization' -> 'QtDataVisualization'
-        module = _correct_module_lettercase('-'.join(module.split('-')[1:-1]))
+        module = correct_module_lettercase('-'.join(module.split('-')[1:-1]))
         #   eg1: 'qml-qtdatavisualization-abstract3dseries' -> ['qml',
         #   'qtdatavisualization', 'abstract3dseries'] -> [
         #   'qtdatavisualization'] -> 'qtdatavisualization'
@@ -108,8 +103,8 @@ def main(file_i, file_o):
 
 # ------------------------------------------------------------------------------
 
-qml_modules = read_and_write.loads('../../resources/qtdoc_compiled/1_all_qml_modules.json')
-qml_modules = qml_modules['module_group'] | qml_modules['module']  # type: dict
+qml_modules = read_and_write.loads(io.json_1)
+qml_modules = {**qml_modules['module_group'], **qml_modules['module']}
 qml_modules.update({  # 扩充
     ''                        : '',
     'qtquick-controls-private': 'QtQuick.Controls.Private',
@@ -118,7 +113,7 @@ qml_modules.update({  # 扩充
 })
 
 
-def _correct_module_lettercase(module: str):
+def correct_module_lettercase(module: str):
     """ 修正模块的大小写.
     
     示例:

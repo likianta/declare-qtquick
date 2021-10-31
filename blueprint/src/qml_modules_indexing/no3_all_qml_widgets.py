@@ -6,20 +6,25 @@ from lk_logger import lk
 from lk_utils import dumps
 from lk_utils import loads
 
+from blueprint.src.qml_modules_indexing.no2_all_qml_types import \
+    correct_module_lettercase
+from blueprint.src.typehint import TJson3Data
+
 
 def main(file_i, file_o, qtdoc_dir: str):
     """
     Args:
-        file_i: '~/resources/no4_all_qml_types.json'. see `no2_all_qml_types.py`
-        file_o: '~/resources/no5_all_qml_widgets.json'
+        file_i:
+        file_o:
         qtdoc_dir: 请传入您的 Qt 安装程序的 Docs 目录. 例如: 'D:/Programs/Qt
             /Docs/Qt-5.14.2' (该路径须确实存在)
     """
     reader = loads(file_i)  # type: dict
+    # noinspection PyTypeChecker
     writer = defaultdict(lambda: defaultdict(lambda: {
-        'parent': '',
+        'parent': (),
         'props' : {},
-    }))
+    }))  # type: TJson3Data
     
     assert exists(qtdoc_dir), (
         'The Qt Docs directory doesn\'t exist!', qtdoc_dir
@@ -33,13 +38,13 @@ def main(file_i, file_o, qtdoc_dir: str):
             continue
         
         try:
-            parent, props = _parse_file(file_i)
+            parent_package, parent_name, props = _parse_file(file_i)
         except Exception as e:
             lk.logp(module, qmltype, file_i,
                     title='error happened when parsing file')
             raise e
         
-        writer[module][qmltype]['parent'] = parent
+        writer[module][qmltype]['parent'] = (parent_package, parent_name)
         writer[module][qmltype]['props'].update(props)
     
     dumps(writer, file_o)
@@ -50,7 +55,8 @@ def _parse_file(file):
     # 下面以 '{qtdoc_dir}/qtquick/qml-qtquick-rectangle.html' 为例分析 (请在
     # 浏览器中查看此 html, 打开开发者工具.)
     
-    parent = ''
+    parent_package = ''
+    parent_name = ''
     props = {}
     
     try:  # get parent
@@ -76,7 +82,15 @@ def _parse_file(file):
         for tr in e.find_all('tr'):
             if tr.td.text.strip() == 'Inherits:':
                 td = tr.find('td', 'memItemRight bottomAlign')
-                parent = td.text.strip()
+                parent_package = correct_module_lettercase(
+                    # this snippet is learnt from `.no2_all_qml_types.main.
+                    # <var:module>.<related_usages>`
+                    '-'.join(td.a['href'].split('-')[1:-1])
+                    # e.g. 'qml-qtquick-item.html' -> ['qml', 'qtquick', 'item']
+                    #   -> ['qtquick'] -> correct_module_lettercase(...)
+                    #   -> 'QtQuick'
+                )
+                parent_name = td.text.strip()
                 break
     except AttributeError:
         pass
@@ -135,7 +149,7 @@ def _parse_file(file):
                 assert len(li.contents) == 3
                 assert li.contents[-1].text == ' (preliminary)'
                 t = li.contents[-2].strip(' :').strip()
-                lk.logt('[I5118]', 'found a preliminary type', parent, t, file)
+                lk.logt('[I5118]', 'found a preliminary type', parent_name, t, file)
             props[p] = t
     except AttributeError:
         pass
@@ -143,7 +157,7 @@ def _parse_file(file):
         breakpoint()
         raise e
     
-    return parent, props
+    return parent_package, parent_name, props
 
 
 def _get_files(data: dict, dir_i: str):
