@@ -5,8 +5,8 @@ The "blueprint" project is partially come from my former project: pyml.
 For some history reasons, "blueprint" remains the old-style code, which is not
 much compilant with current one.
 
-I'm working on to update this project to follow the new guide lines. But before
-this work is done, be notice that there're some inconvinience listed below:
+I'm working on to update this project to follow the new guidelines. But before
+this work is done, be notice that there are some inconvinience listed below:
 
 - Most comments were written in Chinese.
 - Its parser was focus on parsing Qt 5.15, which is slightly incompatible with

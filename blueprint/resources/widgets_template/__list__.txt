@@ -1,3 +1,4 @@
 from .__base__ import *
 
-{WIDGETS_LIST}
+
+{WIDGETS}
