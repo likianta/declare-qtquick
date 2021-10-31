@@ -26,10 +26,11 @@ class Property:
         self.value = default_value
     
     def kiss(self, arg_0):
-        if isinstance(arg_0, Property):
-            self.value = arg_0.value
-        else:
-            self.value = arg_0
+        self.value = arg_0
+        # if isinstance(arg_0, Property):
+        #     self.value = arg_0.value
+        # else:
+        #     self.value = arg_0
     
     set = kiss  # alias (this is more popular to use)
     
@@ -63,7 +64,14 @@ class Property:
     
     def adapt(self) -> str:
         """ Convert python type to qml type. """
-        return str(self.value)
+        if self.value is None:
+            # return something like fullname but a little different.
+            from ..common import convert_name_case
+            return '{}.{}'.format(self.qid, convert_name_case(self.name))
+        elif isinstance(self.value, Property):
+            return self.value.adapt()
+        else:
+            return str(self.value)
 
 
 class PropertyGroup(PropGetterAndSetter):

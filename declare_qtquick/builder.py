@@ -2,6 +2,7 @@ from secrets import token_hex
 from textwrap import dedent
 from textwrap import indent
 
+from .common import convert_name_case
 from .control import id_mgr
 from .properties.base import PropertyGroup
 from .pyside import pyside
@@ -56,10 +57,10 @@ def build_properties(props: TProperties, group_name=''):
             # yield name, prop.value
             if group_name:
                 yield '{}.{}: {}'.format(
-                    group_name, _convert_name_case(name), prop.adapt()
+                    group_name, convert_name_case(name), prop.adapt()
                 )
             else:
-                yield '{}: {}'.format(_convert_name_case(name), prop.adapt())
+                yield '{}: {}'.format(convert_name_case(name), prop.adapt())
 
 
 def build_connections(props: TProperties):
@@ -70,8 +71,8 @@ def build_connections(props: TProperties):
             for notifier_name, func in prop.bound:
                 if func is None:
                     yield '{}: {}'.format(
-                        _convert_name_case(name),
-                        _convert_name_case(notifier_name)
+                        convert_name_case(name),
+                        convert_name_case(notifier_name)
                     )
                 else:
                     # assert isinstance(notifier_name, list)
@@ -80,22 +81,7 @@ def build_connections(props: TProperties):
                         name=(random_id := token_hex(8))
                     )
                     yield '{}: pyside.call("{}", {})'.format(
-                        _convert_name_case(name),
+                        convert_name_case(name),
                         random_id,
-                        list(map(_convert_name_case, notifier_name))
+                        list(map(convert_name_case, notifier_name))
                     )
-
-
-def _convert_name_case(snake_case: str):
-    """ snake_case to camelCase. For example, 'hello_world' -> 'helloWorld'. """
-    if '.' in snake_case:
-        # return '.'.join(convert_name_case(s) for s in snake_case.split('.'))
-        return '.'.join(map(_convert_name_case, snake_case.split('.')))
-    
-    if '_' not in snake_case:
-        camel_case = snake_case
-    else:
-        segs = snake_case.split('_')
-        camel_case = segs[0] + ''.join(x.title() for x in segs[1:])
-    
-    return camel_case
