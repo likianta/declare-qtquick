@@ -4,8 +4,7 @@ from inspect import signature
 
 from lk_logger import lk
 
-from .__external__ import Callable
-from .__external__ import TsPySide as T
+from .__ext__ import T
 
 
 class PyRegister:
@@ -14,7 +13,7 @@ class PyRegister:
     _pyfunc_holder: T.PyFuncHolder = {}
     
     @staticmethod
-    def _get_number_of_args(func: Callable, strip_self=False) -> T.NArgs:
+    def _get_number_of_args(func: T.Callable, strip_self=False) -> T.NArgs:
         """
         References:
             https://stackoverflow.com/questions/3517892/python-list-function

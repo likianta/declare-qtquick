@@ -1,8 +1,7 @@
 from PySide6.QtCore import QObject
 from PySide6.QtCore import Slot
 
-from .__external__ import Optional
-from .__external__ import TsPySide as T
+from .__ext__ import T
 from .register import PyRegister
 
 
@@ -12,8 +11,8 @@ class PySide(QObject, PyRegister):
     @Slot(T.PyFuncName, T.QVal, result=T.QVar)
     @Slot(T.PyFuncName, T.QVal, T.QVal, result=T.QVar)
     def call(self, func_name: T.PyFuncName,
-             args: Optional[T.QVal] = None,
-             kwargs: Optional[T.QVal] = None):
+             args: T.Optional[T.QVal] = None,
+             kwargs: T.Optional[T.QVal] = None):
         """ Call Python functions in QML files.
         
         See detailed docstring at `~/docs/pyside-handler-usage.md`.
