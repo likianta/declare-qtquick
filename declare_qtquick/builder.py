@@ -23,7 +23,7 @@ def build_component(comp: TComponent, level=0) -> str:
                     {children}
                 }}
             ''').rstrip().format(
-                widget_name=comp.name,
+                widget_name=comp.widget_name,
                 qid=comp.qid,
                 properties=indent(
                     '\n'.join(build_properties(comp.properties)),
