@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from .__external__ import TsContext as T
+from .__ext__ import TsContext as T
 
 
 class IdGenerator:
@@ -25,6 +25,10 @@ class IdGenerator:
     @property
     def root_id(self):
         return self._prefix + '0x1'
+
+
+def get_id_level(qid: T.Qid):
+    return qid.count('_') - 1
 
 
 class IdManager:

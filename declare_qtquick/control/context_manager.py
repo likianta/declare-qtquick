@@ -1,4 +1,4 @@
-from .__external__ import TsContext as T
+from .__ext__ import TsContext as T
 from .id_system import id_gen
 
 
