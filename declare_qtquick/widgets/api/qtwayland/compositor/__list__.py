@@ -1,19 +1,19 @@
 from .__base__ import *
 
 
-class WaylandQuickItem(Component, W.PsWaylandQuickItem):
+class WaylandQuickItem(C, W.PsWaylandQuickItem):
     pass
 
 
-class IdleInhibitManagerV1(Component, W.PsIdleInhibitManagerV1):
+class IdleInhibitManagerV1(C, W.PsIdleInhibitManagerV1):
     pass
 
 
-class QtTextInputMethodManager(Component, W.PsQtTextInputMethodManager):
+class QtTextInputMethodManager(C, W.PsQtTextInputMethodManager):
     pass
 
 
-class ShellSurface(Component, W.PsShellSurface):
+class ShellSurface(C, W.PsShellSurface):
     pass
 
 
@@ -21,29 +21,29 @@ class ShellSurfaceItem(WaylandQuickItem, W.PsShellSurfaceItem):
     pass
 
 
-class WaylandClient(Component, W.PsWaylandClient):
+class WaylandClient(C, W.PsWaylandClient):
     pass
 
 
-class WaylandCompositor(Component, W.PsWaylandCompositor):
+class WaylandCompositor(C, W.PsWaylandCompositor):
     pass
 
 
-class WaylandHardwareLayer(Component, W.PsWaylandHardwareLayer):
+class WaylandHardwareLayer(C, W.PsWaylandHardwareLayer):
     pass
 
 
-class WaylandOutput(Component, W.PsWaylandOutput):
+class WaylandOutput(C, W.PsWaylandOutput):
     pass
 
 
-class WaylandSeat(Component, W.PsWaylandSeat):
+class WaylandSeat(C, W.PsWaylandSeat):
     pass
 
 
-class WaylandSurface(Component, W.PsWaylandSurface):
+class WaylandSurface(C, W.PsWaylandSurface):
     pass
 
 
-class WaylandView(Component, W.PsWaylandView):
+class WaylandView(C, W.PsWaylandView):
     pass

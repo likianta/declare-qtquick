@@ -36,6 +36,7 @@ module_2 = f'{resources_dir}/widgets_template/__init__.py'
 module_3 = f'{resources_dir}/widgets_template/__list__.py'
 
 readme = f'{resources_dir}/widgets_template/readme.md'
+api_init = f'{resources_dir}/widgets_template/api_init.txt'
 
 no1 = (html_1, json_1)
 no2 = (html_2, json_2)

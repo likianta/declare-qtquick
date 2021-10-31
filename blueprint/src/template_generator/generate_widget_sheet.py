@@ -221,7 +221,7 @@ def _generate_props(props: Dict[str, str]) -> Iterator[Tuple[str, str]]:
             continue
         prop_name = camel_2_snake_case(prop_name)
         #   e.g. 'checkStateMixed' -> 'check_state_mixed'
-        if prop_name in ('from', 'name', 'properties'):
+        if prop_name in ('from', 'name', 'properties'):  # FIXME
             #   'name', 'properties' are occupied by `declare_qtquick.widgets
             #   .base.Component`
             prop_name += '_'

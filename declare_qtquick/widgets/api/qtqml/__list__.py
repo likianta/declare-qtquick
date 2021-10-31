@@ -1,45 +1,45 @@
 from .__base__ import *
 
 
-class Binding(Component, W.PsBinding):
+class Binding(C, W.PsBinding):
     pass
 
 
-class Component(Component, W.PsComponent):
+class Component(C, W.PsComponent):
     pass
 
 
-class Connections(Component, W.PsConnections):
+class Connections(C, W.PsConnections):
     pass
 
 
-class Date(Component, W.PsDate):
+class Date(C, W.PsDate):
     pass
 
 
-class Locale(Component, W.PsLocale):
+class Locale(C, W.PsLocale):
     pass
 
 
-class LoggingCategory(Component, W.PsLoggingCategory):
+class LoggingCategory(C, W.PsLoggingCategory):
     pass
 
 
-class Number(Component, W.PsNumber):
+class Number(C, W.PsNumber):
     pass
 
 
-class Qt(Component, W.PsQt):
+class Qt(C, W.PsQt):
     pass
 
 
-class QtObject(Component, W.PsQtObject):
+class QtObject(C, W.PsQtObject):
     pass
 
 
-class String(Component, W.PsString):
+class String(C, W.PsString):
     pass
 
 
-class Timer(Component, W.PsTimer):
+class Timer(C, W.PsTimer):
     pass

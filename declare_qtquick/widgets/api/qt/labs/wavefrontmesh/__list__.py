@@ -1,5 +1,5 @@
 from .__base__ import *
 
 
-class WavefrontMesh(Component, W.PsWavefrontMesh):
+class WavefrontMesh(C, W.PsWavefrontMesh):
     pass

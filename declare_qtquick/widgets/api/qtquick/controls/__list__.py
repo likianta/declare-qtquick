@@ -2,10 +2,10 @@ from .__base__ import *
 from .. import Item
 from .. import TableView
 from .. import TextInput
+from .. import Window
 from ...qtqml import QtObject
 from ...qtquick import Text
 from ...qtquick import TextEdit
-from ...qtquick import Window
 
 
 class Control(Item, W.PsControl):

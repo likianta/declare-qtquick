@@ -1,17 +1,17 @@
 from .__base__ import *
 
 
-class DelegateChoice(Component, W.PsDelegateChoice):
+class DelegateChoice(C, W.PsDelegateChoice):
     pass
 
 
-class DelegateChooser(Component, W.PsDelegateChooser):
+class DelegateChooser(C, W.PsDelegateChooser):
     pass
 
 
-class TableModel(Component, W.PsTableModel):
+class TableModel(C, W.PsTableModel):
     pass
 
 
-class TableModelColumn(Component, W.PsTableModelColumn):
+class TableModelColumn(C, W.PsTableModelColumn):
     pass

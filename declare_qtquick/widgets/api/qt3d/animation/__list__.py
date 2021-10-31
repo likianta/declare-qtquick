@@ -2,27 +2,27 @@ from .__base__ import *
 from ...qtqml import QtObject
 
 
-class AbstractAnimation(Component, W.PsAbstractAnimation):
+class AbstractAnimation(C, W.PsAbstractAnimation):
     pass
 
 
-class AbstractClipAnimator(Component, W.PsAbstractClipAnimator):
+class AbstractClipAnimator(C, W.PsAbstractClipAnimator):
     pass
 
 
-class AbstractClipBlendNode(Component, W.PsAbstractClipBlendNode):
+class AbstractClipBlendNode(C, W.PsAbstractClipBlendNode):
     pass
 
 
-class AdditiveClipBlend(Component, W.PsAdditiveClipBlend):
+class AdditiveClipBlend(C, W.PsAdditiveClipBlend):
     pass
 
 
-class AnimationController(Component, W.PsAnimationController):
+class AnimationController(C, W.PsAnimationController):
     pass
 
 
-class AnimationGroup(Component, W.PsAnimationGroup):
+class AnimationGroup(C, W.PsAnimationGroup):
     pass
 
 
@@ -34,7 +34,7 @@ class ClipAnimator(AbstractClipAnimator, W.PsClipAnimator):
     pass
 
 
-class ClipBlendValue(Component, W.PsClipBlendValue):
+class ClipBlendValue(C, W.PsClipBlendValue):
     pass
 
 
@@ -42,7 +42,7 @@ class KeyframeAnimation(AbstractAnimation, W.PsKeyframeAnimation):
     pass
 
 
-class LerpClipBlend(Component, W.PsLerpClipBlend):
+class LerpClipBlend(C, W.PsLerpClipBlend):
     pass
 
 

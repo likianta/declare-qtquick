@@ -10,5 +10,5 @@ class TestCase(Item, W.PsTestCase):
     pass
 
 
-class TouchEventSequence(Component, W.PsTouchEventSequence):
+class TouchEventSequence(C, W.PsTouchEventSequence):
     pass

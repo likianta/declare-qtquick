@@ -1,12 +1,13 @@
 from .__base__ import *
 from .. import Item
+from ..shapes import Shape
 
 
-class Affector(Component, W.PsAffector):
+class Affector(C, W.PsAffector):
     pass
 
 
-class Direction(Component, W.PsDirection):
+class Direction(C, W.PsDirection):
     pass
 
 
@@ -34,7 +35,7 @@ class EllipseShape(Shape, W.PsEllipseShape):
     pass
 
 
-class Emitter(Component, W.PsEmitter):
+class Emitter(C, W.PsEmitter):
     pass
 
 
@@ -66,19 +67,19 @@ class MaskShape(Shape, W.PsMaskShape):
     pass
 
 
-class Particle(Component, W.PsParticle):
+class Particle(C, W.PsParticle):
     pass
 
 
-class ParticleExtruder(Component, W.PsParticleExtruder):
+class ParticleExtruder(C, W.PsParticleExtruder):
     pass
 
 
-class ParticleGroup(Component, W.PsParticleGroup):
+class ParticleGroup(C, W.PsParticleGroup):
     pass
 
 
-class ParticleSystem(Component, W.PsParticleSystem):
+class ParticleSystem(C, W.PsParticleSystem):
     pass
 
 
@@ -86,7 +87,7 @@ class PointDirection(Direction, W.PsPointDirection):
     pass
 
 
-class RectangleShape(Component, W.PsRectangleShape):
+class RectangleShape(C, W.PsRectangleShape):
     pass
 
 
@@ -98,7 +99,7 @@ class TargetDirection(Direction, W.PsTargetDirection):
     pass
 
 
-class TrailEmitter(Component, W.PsTrailEmitter):
+class TrailEmitter(C, W.PsTrailEmitter):
     pass
 
 

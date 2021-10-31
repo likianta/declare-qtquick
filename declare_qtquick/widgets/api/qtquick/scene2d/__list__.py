@@ -1,5 +1,5 @@
 from .__base__ import *
 
 
-class Scene2D(Component, W.PsScene2D):
+class Scene2D(C, W.PsScene2D):
     pass

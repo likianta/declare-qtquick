@@ -1,7 +1,7 @@
 from .__base__ import *
 
 
-class AbstractSeries(Component, W.PsAbstractSeries):
+class AbstractSeries(C, W.PsAbstractSeries):
     pass
 
 
@@ -9,7 +9,7 @@ class AbstractBarSeries(AbstractSeries, W.PsAbstractBarSeries):
     pass
 
 
-class AbstractAxis(Component, W.PsAbstractAxis):
+class AbstractAxis(C, W.PsAbstractAxis):
     pass
 
 
@@ -17,7 +17,7 @@ class XYSeries(AbstractSeries, W.PsXYSeries):
     pass
 
 
-class ChartView(Component, W.PsChartView):
+class ChartView(C, W.PsChartView):
     pass
 
 
@@ -33,7 +33,7 @@ class BarSeries(AbstractBarSeries, W.PsBarSeries):
     pass
 
 
-class BarSet(Component, W.PsBarSet):
+class BarSet(C, W.PsBarSet):
     pass
 
 
@@ -41,7 +41,7 @@ class BoxPlotSeries(AbstractSeries, W.PsBoxPlotSeries):
     pass
 
 
-class BoxSet(Component, W.PsBoxSet):
+class BoxSet(C, W.PsBoxSet):
     pass
 
 
@@ -49,7 +49,7 @@ class CandlestickSeries(AbstractSeries, W.PsCandlestickSeries):
     pass
 
 
-class CandlestickSet(Component, W.PsCandlestickSet):
+class CandlestickSet(C, W.PsCandlestickSet):
     pass
 
 
@@ -57,7 +57,7 @@ class CategoryAxis(AbstractAxis, W.PsCategoryAxis):
     pass
 
 
-class CategoryRange(Component, W.PsCategoryRange):
+class CategoryRange(C, W.PsCategoryRange):
     pass
 
 
@@ -65,15 +65,15 @@ class DateTimeAxis(AbstractAxis, W.PsDateTimeAxis):
     pass
 
 
-class HBarModelMapper(Component, W.PsHBarModelMapper):
+class HBarModelMapper(C, W.PsHBarModelMapper):
     pass
 
 
-class HBoxPlotModelMapper(Component, W.PsHBoxPlotModelMapper):
+class HBoxPlotModelMapper(C, W.PsHBoxPlotModelMapper):
     pass
 
 
-class HCandlestickModelMapper(Component, W.PsHCandlestickModelMapper):
+class HCandlestickModelMapper(C, W.PsHCandlestickModelMapper):
     pass
 
 
@@ -89,15 +89,15 @@ class HorizontalStackedBarSeries(AbstractBarSeries, W.PsHorizontalStackedBarSeri
     pass
 
 
-class HPieModelMapper(Component, W.PsHPieModelMapper):
+class HPieModelMapper(C, W.PsHPieModelMapper):
     pass
 
 
-class HXYModelMapper(Component, W.PsHXYModelMapper):
+class HXYModelMapper(C, W.PsHXYModelMapper):
     pass
 
 
-class Legend(Component, W.PsLegend):
+class Legend(C, W.PsLegend):
     pass
 
 
@@ -109,7 +109,7 @@ class LogValueAxis(AbstractAxis, W.PsLogValueAxis):
     pass
 
 
-class Margins(Component, W.PsMargins):
+class Margins(C, W.PsMargins):
     pass
 
 
@@ -121,7 +121,7 @@ class PieSeries(AbstractSeries, W.PsPieSeries):
     pass
 
 
-class PieSlice(Component, W.PsPieSlice):
+class PieSlice(C, W.PsPieSlice):
     pass
 
 
@@ -145,25 +145,25 @@ class ValueAxis(AbstractAxis, W.PsValueAxis):
     pass
 
 
-class VBarModelMapper(Component, W.PsVBarModelMapper):
+class VBarModelMapper(C, W.PsVBarModelMapper):
     pass
 
 
-class VBoxPlotModelMapper(Component, W.PsVBoxPlotModelMapper):
+class VBoxPlotModelMapper(C, W.PsVBoxPlotModelMapper):
     pass
 
 
-class VCandlestickModelMapper(Component, W.PsVCandlestickModelMapper):
+class VCandlestickModelMapper(C, W.PsVCandlestickModelMapper):
     pass
 
 
-class VPieModelMapper(Component, W.PsVPieModelMapper):
+class VPieModelMapper(C, W.PsVPieModelMapper):
     pass
 
 
-class VXYModelMapper(Component, W.PsVXYModelMapper):
+class VXYModelMapper(C, W.PsVXYModelMapper):
     pass
 
 
-class XYPoint(Component, W.PsXYPoint):
+class XYPoint(C, W.PsXYPoint):
     pass

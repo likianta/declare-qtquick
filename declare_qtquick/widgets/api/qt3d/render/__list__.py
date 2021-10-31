@@ -2,6 +2,7 @@ from .__base__ import *
 from ..core import BoundingVolume
 from ..core import Component3D
 from ...qtqml import QtObject
+from ...qtquick3d import Node
 
 
 class RenderState(Node, W.PsRenderState):
@@ -16,11 +17,11 @@ class AbstractTextureImage(Node, W.PsAbstractTextureImage):
     pass
 
 
-class AbstractRayCaster(Component, W.PsAbstractRayCaster):
+class AbstractRayCaster(C, W.PsAbstractRayCaster):
     pass
 
 
-class AbstractTexture(Component, W.PsAbstractTexture):
+class AbstractTexture(C, W.PsAbstractTexture):
     pass
 
 
@@ -44,7 +45,7 @@ class BlitFramebuffer(FrameGraphNode, W.PsBlitFramebuffer):
     pass
 
 
-class BufferCapture(Component, W.PsBufferCapture):
+class BufferCapture(C, W.PsBufferCapture):
     pass
 
 
@@ -92,7 +93,7 @@ class DepthTest(RenderState, W.PsDepthTest):
     pass
 
 
-class DirectionalLight(Component, W.PsDirectionalLight):
+class DirectionalLight(C, W.PsDirectionalLight):
     pass
 
 
@@ -108,7 +109,7 @@ class Effect(Node, W.PsEffect):
     pass
 
 
-class EnvironmentLight(Component, W.PsEnvironmentLight):
+class EnvironmentLight(C, W.PsEnvironmentLight):
     pass
 
 
@@ -156,7 +157,7 @@ class LevelOfDetailSwitch(Component3D, W.PsLevelOfDetailSwitch):
     pass
 
 
-class Light(Component, W.PsLight):
+class Light(C, W.PsLight):
     pass
 
 
@@ -164,7 +165,7 @@ class LineWidth(RenderState, W.PsLineWidth):
     pass
 
 
-class Material(Component, W.PsMaterial):
+class Material(C, W.PsMaterial):
     pass
 
 
@@ -172,7 +173,7 @@ class MemoryBarrier(FrameGraphNode, W.PsMemoryBarrier):
     pass
 
 
-class Mesh(Component, W.PsMesh):
+class Mesh(C, W.PsMesh):
     pass
 
 
@@ -192,15 +193,15 @@ class NoPicking(FrameGraphNode, W.PsNoPicking):
     pass
 
 
-class ObjectPicker(Component, W.PsObjectPicker):
+class ObjectPicker(C, W.PsObjectPicker):
     pass
 
 
-class Parameter(Component, W.PsParameter):
+class Parameter(C, W.PsParameter):
     pass
 
 
-class PickEvent(Component, W.PsPickEvent):
+class PickEvent(C, W.PsPickEvent):
     pass
 
 
@@ -208,23 +209,23 @@ class PickingProxy(Component3D, W.PsPickingProxy):
     pass
 
 
-class PickingSettings(Component, W.PsPickingSettings):
+class PickingSettings(C, W.PsPickingSettings):
     pass
 
 
-class PickLineEvent(Component, W.PsPickLineEvent):
+class PickLineEvent(C, W.PsPickLineEvent):
     pass
 
 
-class PickPointEvent(Component, W.PsPickPointEvent):
+class PickPointEvent(C, W.PsPickPointEvent):
     pass
 
 
-class PickTriangleEvent(Component, W.PsPickTriangleEvent):
+class PickTriangleEvent(C, W.PsPickTriangleEvent):
     pass
 
 
-class PointLight(Component, W.PsPointLight):
+class PointLight(C, W.PsPointLight):
     pass
 
 
@@ -244,11 +245,11 @@ class RasterMode(RenderState, W.PsRasterMode):
     pass
 
 
-class RayCaster(Component, W.PsRayCaster):
+class RayCaster(C, W.PsRayCaster):
     pass
 
 
-class RenderCapabilities(Component, W.PsRenderCapabilities):
+class RenderCapabilities(C, W.PsRenderCapabilities):
     pass
 
 
@@ -256,7 +257,7 @@ class RenderCapture(FrameGraphNode, W.PsRenderCapture):
     pass
 
 
-class RenderCaptureReply(Component, W.PsRenderCaptureReply):
+class RenderCaptureReply(C, W.PsRenderCaptureReply):
     pass
 
 
@@ -268,7 +269,7 @@ class RenderPassFilter(FrameGraphNode, W.PsRenderPassFilter):
     pass
 
 
-class RenderSettings(Component, W.PsRenderSettings):
+class RenderSettings(C, W.PsRenderSettings):
     pass
 
 
@@ -280,7 +281,7 @@ class RenderSurfaceSelector(FrameGraphNode, W.PsRenderSurfaceSelector):
     pass
 
 
-class RenderTarget(Component, W.PsRenderTarget):
+class RenderTarget(C, W.PsRenderTarget):
     pass
 
 
@@ -300,7 +301,7 @@ class ScissorTest(RenderState, W.PsScissorTest):
     pass
 
 
-class ScreenRayCaster(Component, W.PsScreenRayCaster):
+class ScreenRayCaster(C, W.PsScreenRayCaster):
     pass
 
 
@@ -308,19 +309,19 @@ class SeamlessCubemap(RenderState, W.PsSeamlessCubemap):
     pass
 
 
-class ShaderImage(Component, W.PsShaderImage):
+class ShaderImage(C, W.PsShaderImage):
     pass
 
 
-class ShaderProgram(Component, W.PsShaderProgram):
+class ShaderProgram(C, W.PsShaderProgram):
     pass
 
 
-class ShaderProgramBuilder(Component, W.PsShaderProgramBuilder):
+class ShaderProgramBuilder(C, W.PsShaderProgramBuilder):
     pass
 
 
-class SharedGLTexture(Component, W.PsSharedGLTexture):
+class SharedGLTexture(C, W.PsSharedGLTexture):
     pass
 
 
@@ -328,7 +329,7 @@ class SortPolicy(FrameGraphNode, W.PsSortPolicy):
     pass
 
 
-class SpotLight(Component, W.PsSpotLight):
+class SpotLight(C, W.PsSpotLight):
     pass
 
 
@@ -356,7 +357,7 @@ class SubtreeEnabler(FrameGraphNode, W.PsSubtreeEnabler):
     pass
 
 
-class Technique(Component, W.PsTechnique):
+class Technique(C, W.PsTechnique):
     pass
 
 
@@ -364,43 +365,43 @@ class TechniqueFilter(FrameGraphNode, W.PsTechniqueFilter):
     pass
 
 
-class Texture1D(Component, W.PsTexture1D):
+class Texture1D(C, W.PsTexture1D):
     pass
 
 
-class Texture1DArray(Component, W.PsTexture1DArray):
+class Texture1DArray(C, W.PsTexture1DArray):
     pass
 
 
-class Texture2D(Component, W.PsTexture2D):
+class Texture2D(C, W.PsTexture2D):
     pass
 
 
-class Texture2DArray(Component, W.PsTexture2DArray):
+class Texture2DArray(C, W.PsTexture2DArray):
     pass
 
 
-class Texture2DMultisample(Component, W.PsTexture2DMultisample):
+class Texture2DMultisample(C, W.PsTexture2DMultisample):
     pass
 
 
-class Texture2DMultisampleArray(Component, W.PsTexture2DMultisampleArray):
+class Texture2DMultisampleArray(C, W.PsTexture2DMultisampleArray):
     pass
 
 
-class Texture3D(Component, W.PsTexture3D):
+class Texture3D(C, W.PsTexture3D):
     pass
 
 
-class TextureBuffer(Component, W.PsTextureBuffer):
+class TextureBuffer(C, W.PsTextureBuffer):
     pass
 
 
-class TextureCubeMap(Component, W.PsTextureCubeMap):
+class TextureCubeMap(C, W.PsTextureCubeMap):
     pass
 
 
-class TextureCubeMapArray(Component, W.PsTextureCubeMapArray):
+class TextureCubeMapArray(C, W.PsTextureCubeMapArray):
     pass
 
 
@@ -408,11 +409,11 @@ class TextureImage(AbstractTextureImage, W.PsTextureImage):
     pass
 
 
-class TextureLoader(Component, W.PsTextureLoader):
+class TextureLoader(C, W.PsTextureLoader):
     pass
 
 
-class TextureRectangle(Component, W.PsTextureRectangle):
+class TextureRectangle(C, W.PsTextureRectangle):
     pass
 
 

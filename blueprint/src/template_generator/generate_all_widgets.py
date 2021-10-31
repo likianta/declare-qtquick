@@ -61,8 +61,9 @@ def main(widgets_dir=io.widgets_dir):
             _generate_init(tmpl_data.init, target_files.init, package=package)
             _generate_list(tmpl_data.list, target_files.list, data=v0)
     
-    # put a readme in root dir
+    # put readme and __init__ files in api root dir.
     shutil.copyfile(io.readme, f'{widgets_dir}/readme.md')
+    shutil.copyfile(io.api_init, f'{widgets_dir}/__init__.py')
 
 
 # ------------------------------------------------------------------------------
@@ -117,6 +118,9 @@ def _generate_list(tmpl_i: str, file_o: TPath, data: TWidgetData):
     #   }
     # }
     
+    base_component = 'C'
+    # # base_component = 'Component'
+    
     widgets_dict = {}  # type: TWidgetSheetData2
     widget_tmpl = dedent('''
         class {WIDGET}({PARENT}, {PROP_SHEET}):
@@ -125,7 +129,7 @@ def _generate_list(tmpl_i: str, file_o: TPath, data: TWidgetData):
     
     with lk.counting(len(data)):
         for widget_name, v0 in data.items():
-            parent_name = v0['parent'] or 'Component'
+            parent_name = v0['parent'] or base_component
             lk.logax(widget_name, parent_name)
             
             widgets_dict[widget_name] = (
@@ -138,7 +142,7 @@ def _generate_list(tmpl_i: str, file_o: TPath, data: TWidgetData):
             )
     
     dumps(tmpl_i.format(WIDGETS='\n\n\n'.join(
-        sort_formatted_list(widgets_dict, ('Component',))
+        sort_formatted_list(widgets_dict, (base_component,))
     )).strip(), file_o)
 
 

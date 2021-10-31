@@ -1,33 +1,33 @@
 from .__base__ import *
 
 
-class DelegateModel(Component, W.PsDelegateModel):
+class DelegateModel(C, W.PsDelegateModel):
     pass
 
 
-class DelegateModelGroup(Component, W.PsDelegateModelGroup):
+class DelegateModelGroup(C, W.PsDelegateModelGroup):
     pass
 
 
-class Instantiator(Component, W.PsInstantiator):
+class Instantiator(C, W.PsInstantiator):
     pass
 
 
-class ItemSelectionModel(Component, W.PsItemSelectionModel):
+class ItemSelectionModel(C, W.PsItemSelectionModel):
     pass
 
 
-class ListElement(Component, W.PsListElement):
+class ListElement(C, W.PsListElement):
     pass
 
 
-class ListModel(Component, W.PsListModel):
+class ListModel(C, W.PsListModel):
     pass
 
 
-class ObjectModel(Component, W.PsObjectModel):
+class ObjectModel(C, W.PsObjectModel):
     pass
 
 
-class Package(Component, W.PsPackage):
+class Package(C, W.PsPackage):
     pass

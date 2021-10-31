@@ -1,85 +1,85 @@
 from .__base__ import *
 
 
-class AdditiveColorGradient(Component, W.PsAdditiveColorGradient):
+class AdditiveColorGradient(C, W.PsAdditiveColorGradient):
     pass
 
 
-class Blur(Component, W.PsBlur):
+class Blur(C, W.PsBlur):
     pass
 
 
-class BrushStrokes(Component, W.PsBrushStrokes):
+class BrushStrokes(C, W.PsBrushStrokes):
     pass
 
 
-class ChromaticAberration(Component, W.PsChromaticAberration):
+class ChromaticAberration(C, W.PsChromaticAberration):
     pass
 
 
-class ColorMaster(Component, W.PsColorMaster):
+class ColorMaster(C, W.PsColorMaster):
     pass
 
 
-class DepthOfFieldHQBlur(Component, W.PsDepthOfFieldHQBlur):
+class DepthOfFieldHQBlur(C, W.PsDepthOfFieldHQBlur):
     pass
 
 
-class Desaturate(Component, W.PsDesaturate):
+class Desaturate(C, W.PsDesaturate):
     pass
 
 
-class DistortionRipple(Component, W.PsDistortionRipple):
+class DistortionRipple(C, W.PsDistortionRipple):
     pass
 
 
-class DistortionSphere(Component, W.PsDistortionSphere):
+class DistortionSphere(C, W.PsDistortionSphere):
     pass
 
 
-class DistortionSpiral(Component, W.PsDistortionSpiral):
+class DistortionSpiral(C, W.PsDistortionSpiral):
     pass
 
 
-class EdgeDetect(Component, W.PsEdgeDetect):
+class EdgeDetect(C, W.PsEdgeDetect):
     pass
 
 
-class Emboss(Component, W.PsEmboss):
+class Emboss(C, W.PsEmboss):
     pass
 
 
-class Flip(Component, W.PsFlip):
+class Flip(C, W.PsFlip):
     pass
 
 
-class Fxaa(Component, W.PsFxaa):
+class Fxaa(C, W.PsFxaa):
     pass
 
 
-class GaussianBlur(Component, W.PsGaussianBlur):
+class GaussianBlur(C, W.PsGaussianBlur):
     pass
 
 
-class HDRBloomTonemap(Component, W.PsHDRBloomTonemap):
+class HDRBloomTonemap(C, W.PsHDRBloomTonemap):
     pass
 
 
-class MotionBlur(Component, W.PsMotionBlur):
+class MotionBlur(C, W.PsMotionBlur):
     pass
 
 
-class Scatter(Component, W.PsScatter):
+class Scatter(C, W.PsScatter):
     pass
 
 
-class SCurveTonemap(Component, W.PsSCurveTonemap):
+class SCurveTonemap(C, W.PsSCurveTonemap):
     pass
 
 
-class TiltShift(Component, W.PsTiltShift):
+class TiltShift(C, W.PsTiltShift):
     pass
 
 
-class Vignette(Component, W.PsVignette):
+class Vignette(C, W.PsVignette):
     pass

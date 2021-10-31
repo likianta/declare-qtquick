@@ -10,7 +10,7 @@ class GridLayout(Item, W.PsGridLayout):
     pass
 
 
-class Layout(Component, W.PsLayout):
+class Layout(C, W.PsLayout):
     pass
 
 

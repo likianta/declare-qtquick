@@ -1,52 +1,53 @@
 from .__base__ import *
 from ..core import Component3D
+from ...qtquick3d import Node
 
 
-class AbstractActionInput(Component, W.PsAbstractActionInput):
+class AbstractActionInput(C, W.PsAbstractActionInput):
     pass
 
 
-class AbstractAxisInput(Component, W.PsAbstractAxisInput):
+class AbstractAxisInput(C, W.PsAbstractAxisInput):
     pass
 
 
-class AbstractPhysicalDevice(Component, W.PsAbstractPhysicalDevice):
+class AbstractPhysicalDevice(C, W.PsAbstractPhysicalDevice):
     pass
 
 
-class Action(Component, W.PsAction):
+class Action(C, W.PsAction):
     pass
 
 
-class ActionInput(Component, W.PsActionInput):
+class ActionInput(C, W.PsActionInput):
     pass
 
 
-class AnalogAxisInput(Component, W.PsAnalogAxisInput):
+class AnalogAxisInput(C, W.PsAnalogAxisInput):
     pass
 
 
-class Axis(Component, W.PsAxis):
+class Axis(C, W.PsAxis):
     pass
 
 
-class AxisAccumulator(Component, W.PsAxisAccumulator):
+class AxisAccumulator(C, W.PsAxisAccumulator):
     pass
 
 
-class AxisSetting(Component, W.PsAxisSetting):
+class AxisSetting(C, W.PsAxisSetting):
     pass
 
 
-class ButtonAxisInput(Component, W.PsButtonAxisInput):
+class ButtonAxisInput(C, W.PsButtonAxisInput):
     pass
 
 
-class InputChord(Component, W.PsInputChord):
+class InputChord(C, W.PsInputChord):
     pass
 
 
-class InputSequence(Component, W.PsInputSequence):
+class InputSequence(C, W.PsInputSequence):
     pass
 
 
@@ -62,25 +63,25 @@ class KeyboardHandler(Component3D, W.PsKeyboardHandler):
     pass
 
 
-class KeyEvent(Component, W.PsKeyEvent):
+class KeyEvent(C, W.PsKeyEvent):
     pass
 
 
-class LogicalDevice(Component, W.PsLogicalDevice):
+class LogicalDevice(C, W.PsLogicalDevice):
     pass
 
 
-class MouseDevice(Component, W.PsMouseDevice):
+class MouseDevice(C, W.PsMouseDevice):
     pass
 
 
-class MouseEvent(Component, W.PsMouseEvent):
+class MouseEvent(C, W.PsMouseEvent):
     pass
 
 
-class MouseHandler(Component, W.PsMouseHandler):
+class MouseHandler(C, W.PsMouseHandler):
     pass
 
 
-class WheelEvent(Component, W.PsWheelEvent):
+class WheelEvent(C, W.PsWheelEvent):
     pass

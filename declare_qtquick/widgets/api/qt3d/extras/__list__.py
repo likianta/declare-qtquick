@@ -1,39 +1,41 @@
 from .__base__ import *
+from ..core import Entity
+from ...qtquick3d import Material
 
 
-class ConeGeometry(Component, W.PsConeGeometry):
+class ConeGeometry(C, W.PsConeGeometry):
     pass
 
 
-class ConeGeometryView(Component, W.PsConeGeometryView):
+class ConeGeometryView(C, W.PsConeGeometryView):
     pass
 
 
-class ConeMesh(Component, W.PsConeMesh):
+class ConeMesh(C, W.PsConeMesh):
     pass
 
 
-class CuboidGeometry(Component, W.PsCuboidGeometry):
+class CuboidGeometry(C, W.PsCuboidGeometry):
     pass
 
 
-class CuboidGeometryView(Component, W.PsCuboidGeometryView):
+class CuboidGeometryView(C, W.PsCuboidGeometryView):
     pass
 
 
-class CuboidMesh(Component, W.PsCuboidMesh):
+class CuboidMesh(C, W.PsCuboidMesh):
     pass
 
 
-class CylinderGeometry(Component, W.PsCylinderGeometry):
+class CylinderGeometry(C, W.PsCylinderGeometry):
     pass
 
 
-class CylinderGeometryView(Component, W.PsCylinderGeometryView):
+class CylinderGeometryView(C, W.PsCylinderGeometryView):
     pass
 
 
-class CylinderMesh(Component, W.PsCylinderMesh):
+class CylinderMesh(C, W.PsCylinderMesh):
     pass
 
 
@@ -45,15 +47,15 @@ class DiffuseSpecularMapMaterial(Material, W.PsDiffuseSpecularMapMaterial):
     pass
 
 
-class DiffuseSpecularMaterial(Component, W.PsDiffuseSpecularMaterial):
+class DiffuseSpecularMaterial(C, W.PsDiffuseSpecularMaterial):
     pass
 
 
-class ExtrudedTextGeometry(Component, W.PsExtrudedTextGeometry):
+class ExtrudedTextGeometry(C, W.PsExtrudedTextGeometry):
     pass
 
 
-class ExtrudedTextMesh(Component, W.PsExtrudedTextMesh):
+class ExtrudedTextMesh(C, W.PsExtrudedTextMesh):
     pass
 
 
@@ -61,7 +63,7 @@ class FirstPersonCameraController(Entity, W.PsFirstPersonCameraController):
     pass
 
 
-class ForwardRenderer(Component, W.PsForwardRenderer):
+class ForwardRenderer(C, W.PsForwardRenderer):
     pass
 
 
@@ -69,7 +71,7 @@ class GoochMaterial(Material, W.PsGoochMaterial):
     pass
 
 
-class MetalRoughMaterial(Component, W.PsMetalRoughMaterial):
+class MetalRoughMaterial(C, W.PsMetalRoughMaterial):
     pass
 
 
@@ -101,45 +103,45 @@ class PhongMaterial(Material, W.PsPhongMaterial):
     pass
 
 
-class PlaneGeometry(Component, W.PsPlaneGeometry):
+class PlaneGeometry(C, W.PsPlaneGeometry):
     pass
 
 
-class PlaneGeometryView(Component, W.PsPlaneGeometryView):
+class PlaneGeometryView(C, W.PsPlaneGeometryView):
     pass
 
 
-class PlaneMesh(Component, W.PsPlaneMesh):
+class PlaneMesh(C, W.PsPlaneMesh):
     pass
 
 
-class SkyboxEntity(Component, W.PsSkyboxEntity):
+class SkyboxEntity(C, W.PsSkyboxEntity):
     pass
 
 
-class SphereGeometry(Component, W.PsSphereGeometry):
+class SphereGeometry(C, W.PsSphereGeometry):
     pass
 
 
-class SphereGeometryView(Component, W.PsSphereGeometryView):
+class SphereGeometryView(C, W.PsSphereGeometryView):
     pass
 
 
-class SphereMesh(Component, W.PsSphereMesh):
+class SphereMesh(C, W.PsSphereMesh):
     pass
 
 
-class Text2DEntity(Component, W.PsText2DEntity):
+class Text2DEntity(C, W.PsText2DEntity):
     pass
 
 
-class TorusGeometry(Component, W.PsTorusGeometry):
+class TorusGeometry(C, W.PsTorusGeometry):
     pass
 
 
-class TorusGeometryView(Component, W.PsTorusGeometryView):
+class TorusGeometryView(C, W.PsTorusGeometryView):
     pass
 
 
-class TorusMesh(Component, W.PsTorusMesh):
+class TorusMesh(C, W.PsTorusMesh):
     pass

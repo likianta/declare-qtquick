@@ -23,7 +23,7 @@ class Material(Object3D, W.PsMaterial):
     pass
 
 
-class Command(Component, W.PsCommand):
+class Command(C, W.PsCommand):
     pass
 
 
@@ -35,11 +35,11 @@ class PerspectiveCamera(Camera, W.PsPerspectiveCamera):
     pass
 
 
-class Bounds(Component, W.PsBounds):
+class Bounds(C, W.PsBounds):
     pass
 
 
-class Buffer(Component, W.PsBuffer):
+class Buffer(C, W.PsBuffer):
     pass
 
 
@@ -95,7 +95,7 @@ class Model(Node, W.PsModel):
     pass
 
 
-class MorphTarget(Component, W.PsMorphTarget):
+class MorphTarget(C, W.PsMorphTarget):
     pass
 
 
@@ -103,11 +103,11 @@ class OrthographicCamera(Camera, W.PsOrthographicCamera):
     pass
 
 
-class Pass(Component, W.PsPass):
+class Pass(C, W.PsPass):
     pass
 
 
-class PickResult(Component, W.PsPickResult):
+class PickResult(C, W.PsPickResult):
     pass
 
 
@@ -123,7 +123,7 @@ class QuaternionAnimation(PropertyAnimation, W.PsQuaternionAnimation):
     pass
 
 
-class RenderStats(Component, W.PsRenderStats):
+class RenderStats(C, W.PsRenderStats):
     pass
 
 
@@ -139,7 +139,7 @@ class SetUniformValue(Command, W.PsSetUniformValue):
     pass
 
 
-class Shader(Component, W.PsShader):
+class Shader(C, W.PsShader):
     pass
 
 
@@ -159,9 +159,9 @@ class TextureData(Object3D, W.PsTextureData):
     pass
 
 
-class TextureInput(Component, W.PsTextureInput):
+class TextureInput(C, W.PsTextureInput):
     pass
 
 
-class View3D(Component, W.PsView3D):
+class View3D(C, W.PsView3D):
     pass

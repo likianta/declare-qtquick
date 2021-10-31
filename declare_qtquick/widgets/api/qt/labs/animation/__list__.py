@@ -1,5 +1,5 @@
 from .__base__ import *
 
 
-class BoundaryRule(Component, W.PsBoundaryRule):
+class BoundaryRule(C, W.PsBoundaryRule):
     pass

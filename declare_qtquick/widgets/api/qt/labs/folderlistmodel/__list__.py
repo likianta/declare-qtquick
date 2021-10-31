@@ -1,5 +1,5 @@
 from .__base__ import *
 
 
-class FolderListModel(Component, W.PsFolderListModel):
+class FolderListModel(C, W.PsFolderListModel):
     pass

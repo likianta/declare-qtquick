@@ -1,5 +1,6 @@
 from declare_qtquick.widgets.api.qtqml import QtObject
 from .__base__ import *
+from ... import Canvas
 from ... import Item
 
 

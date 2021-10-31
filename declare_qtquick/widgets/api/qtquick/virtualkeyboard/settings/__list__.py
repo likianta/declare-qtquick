@@ -1,5 +1,5 @@
 from .__base__ import *
 
 
-class VirtualKeyboardSettings(Component, W.PsVirtualKeyboardSettings):
+class VirtualKeyboardSettings(C, W.PsVirtualKeyboardSettings):
     pass

@@ -1,5 +1,6 @@
 from .__base__ import *
 from .. import Item
+from .. import Loader
 from .. import MultiPointTouchArea
 from ..layouts import ColumnLayout
 from ..layouts import RowLayout
@@ -25,7 +26,7 @@ class EnterKey(BaseKey, W.PsEnterKey):
     pass
 
 
-class EnterKeyAction(Component, W.PsEnterKeyAction):
+class EnterKeyAction(C, W.PsEnterKeyAction):
     pass
 
 
@@ -49,15 +50,15 @@ class HideKeyboardKey(BaseKey, W.PsHideKeyboardKey):
     pass
 
 
-class InputContext(Component, W.PsInputContext):
+class InputContext(C, W.PsInputContext):
     pass
 
 
-class InputEngine(Component, W.PsInputEngine):
+class InputEngine(C, W.PsInputEngine):
     pass
 
 
-class InputMethod(Component, W.PsInputMethod):
+class InputMethod(C, W.PsInputMethod):
     pass
 
 
@@ -81,7 +82,7 @@ class KeyboardLayoutLoader(Loader, W.PsKeyboardLayoutLoader):
     pass
 
 
-class KeyboardObserver(Component, W.PsKeyboardObserver):
+class KeyboardObserver(C, W.PsKeyboardObserver):
     pass
 
 
@@ -97,11 +98,11 @@ class NumberKey(Key, W.PsNumberKey):
     pass
 
 
-class SelectionListModel(Component, W.PsSelectionListModel):
+class SelectionListModel(C, W.PsSelectionListModel):
     pass
 
 
-class ShiftHandler(Component, W.PsShiftHandler):
+class ShiftHandler(C, W.PsShiftHandler):
     pass
 
 
@@ -117,7 +118,7 @@ class SymbolModeKey(Key, W.PsSymbolModeKey):
     pass
 
 
-class Trace(Component, W.PsTrace):
+class Trace(C, W.PsTrace):
     pass
 
 
@@ -129,5 +130,5 @@ class TraceInputKey(Item, W.PsTraceInputKey):
     pass
 
 
-class VirtualKeyboard(Component, W.PsVirtualKeyboard):
+class VirtualKeyboard(C, W.PsVirtualKeyboard):
     pass

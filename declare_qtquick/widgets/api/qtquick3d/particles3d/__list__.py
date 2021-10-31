@@ -1,5 +1,8 @@
+from xml.dom import Node
+
 from .__base__ import *
 from .. import Object3D
+from ...qt3d.core import Node
 from ...qtqml import QtObject
 
 

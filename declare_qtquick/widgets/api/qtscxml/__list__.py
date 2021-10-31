@@ -1,17 +1,17 @@
 from .__base__ import *
 
 
-class EventConnection(Component, W.PsEventConnection):
+class EventConnection(C, W.PsEventConnection):
     pass
 
 
-class InvokedServices(Component, W.PsInvokedServices):
+class InvokedServices(C, W.PsInvokedServices):
     pass
 
 
-class ScxmlStateMachine(Component, W.PsScxmlStateMachine):
+class ScxmlStateMachine(C, W.PsScxmlStateMachine):
     pass
 
 
-class StateMachineLoader(Component, W.PsStateMachineLoader):
+class StateMachineLoader(C, W.PsStateMachineLoader):
     pass

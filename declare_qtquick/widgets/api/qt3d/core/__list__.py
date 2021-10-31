@@ -2,7 +2,7 @@ from .__base__ import *
 from ...qtquick import PropertyAnimation
 
 
-class Node(Component, W.PsNode):
+class Node(C, W.PsNode):
     pass
 
 
@@ -22,19 +22,19 @@ class Armature(Component3D, W.PsArmature):
     pass
 
 
-class Attribute(Component, W.PsAttribute):
+class Attribute(C, W.PsAttribute):
     pass
 
 
-class BoundingVolume(Component, W.PsBoundingVolume):
+class BoundingVolume(C, W.PsBoundingVolume):
     pass
 
 
-class Buffer(Component, W.PsBuffer):
+class Buffer(C, W.PsBuffer):
     pass
 
 
-class CoreSettings(Component, W.PsCoreSettings):
+class CoreSettings(C, W.PsCoreSettings):
     pass
 
 
@@ -54,7 +54,7 @@ class Joint(Node, W.PsJoint):
     pass
 
 
-class NodeInstantiator(Component, W.PsNodeInstantiator):
+class NodeInstantiator(C, W.PsNodeInstantiator):
     pass
 
 

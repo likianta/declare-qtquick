@@ -1,5 +1,5 @@
 from .__base__ import *
 
 
-class Settings(Component, W.PsSettings):
+class Settings(C, W.PsSettings):
     pass

@@ -4,7 +4,7 @@ See `declare_qtquick.widgets.__init__`.
 # noinspection PyUnresolvedReferences
 from typing import Union
 
-Component = None
+C = None
 P = None
 T = None
 W = None
@@ -15,8 +15,8 @@ if __name__ == '__main__':
     from declare_qtquick.widgets import widget_sheet as _wsheet
     from declare_qtquick import properties as _properties
     from declare_qtquick.typehint import prop_hint as _prop_hint
-    
-    Component = _Component
+
+    C = _Component
     P = _properties
     T = _prop_hint
     #   note: `T` has no usage. we will remove it and its source code in the
@@ -28,8 +28,8 @@ if __name__ == '__main__':
 
 
 def setup(**kwargs):
-    global Component, P, T, W
-    Component = kwargs['component']
+    global C, P, T, W
+    C = kwargs['component']
     P = kwargs['properties']
     T = kwargs['prop_hint']
     W = kwargs['widgets_sheet']
