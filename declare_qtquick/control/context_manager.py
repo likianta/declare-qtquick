@@ -8,21 +8,43 @@ class ContextManager:
         self._id_gen = id_gen
         self._root = []
         self._node = self._root
-        self._node_chain = self._root
+        self._node_history = []
     
     def upgrade(self, obj: T.Component):
-        self._id_gen.upgrade()
-        
         temp = []
         self._node.append((obj, temp))
-        self._node_chain.append(temp)
-        self._node = temp
+        last_node, self._node = self._node, temp
+        self._node_history.append(last_node)
         
+        ''' Illustration
+        
+        step 1:
+            [(A, [])] -> [(A, [(B, [])])]
+            |    ^^1|    |    | ^2 ^^3| |
+            ^-4-----^    |    ^-1-----^ |
+                         ^-4------------^
+            1: self._node
+            2: obj
+            3: temp
+            4: self._root
+            ~. self._node_history = [#4]
+        
+        step 2:
+            [(A, [(B, [])])]
+            |    |    ^^1| |
+            |    ^-2-----^ |
+            ^-3------------^
+            1. self._node = temp
+            3. self._root
+            ~. self._node_history = [#4, #2]
+        '''
+
+        self._id_gen.upgrade()
         return self._id_gen.gen_id()
     
     def downgrade(self):
-        self._node_chain.pop()
-        self._node = self._node_chain[-1]
+        self._node = self._node_history.pop()
+        self._id_gen.downgrade()
     
     def dump(self):
         return self._root

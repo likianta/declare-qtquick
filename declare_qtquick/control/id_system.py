@@ -15,11 +15,14 @@ class IdGenerator:
         self._id_chain[self.level] += 1
     
     def downgrade(self):
-        self.level -= 1
+        # reset children level count
+        for level in range(self.level + 1, max(self._id_chain)):
+            self._id_chain[level] = 0
+        self.level -= 1  # go to uplevel
     
     def gen_id(self) -> str:
         return self._prefix + '_'.join(
-            hex(self._id_chain[k]) for k in sorted(self._id_chain)
+            hex(self._id_chain[level]) for level in range(1, self.level + 1)
         )
     
     @property
