@@ -16,8 +16,10 @@ _TFakeModule = _lambdex('', """
 if __name__ == '__main__':
     from declare_qtquick.widgets.base import Component as _Component
     from declare_qtquick.properties import base as _base_prop
+    from declare_qtquick.properties.prop_sheet import PropSheet as _PropSheet
 else:
     _Component = None
+    _PropSheet = None
     _base_prop = _TFakeModule
 
 # ------------------------------------------------------------------------------
@@ -40,20 +42,6 @@ TComponent = _Component
 
 # ------------------------------------------------------------------------------
 
-class TsProperty:
-    Any = Any
-    BindingArg0 = Union[TProperty, Iterable[TProperty]]
-    BindingArg1 = Optional[Callable]
-    Bool = bool
-    Bound = TBound
-    Color = str
-    FullName = TFullName
-    Name = TName
-    Number = Union[int, float]
-    Properties = TProperties
-    Qid = TQid
-    String = str
-
 
 class TsComponent:
     Component = TComponent
@@ -73,7 +61,45 @@ class TsContext:
     QidList = List[TQid]
 
 
+class TsProperty:
+    Any = Any
+    BindingArg0 = Union[TProperty, Iterable[TProperty]]
+    BindingArg1 = Optional[Callable]
+    Bool = bool
+    Bound = TBound
+    Color = str
+    Component = TComponent
+    Date = str
+    FullName = TFullName
+    GroupName = TName
+    Int = int
+    List = Union[list, tuple, set]
+    Name = TName
+    Number = Union[int, float]
+    PropName = TPropName
+    Properties = TProperties
+    Qid = TQid
+    String = str
+    Union = Union
+
+
+class TsPropSheet:
+    # noinspection PyUnresolvedReferences,PyProtectedMember
+    from typing import _UnionGenericAlias as RealUnionType
+    
+    Constructable = Union[TProperty, Callable]
+    PropSheet = _PropSheet
+    PropSheetIter = Iterator[_PropSheet]
+    Property = TProperty
+    PropsIter = Iterator[Tuple[TPropName, TProperty]]
+    RawType = Union[TProperty, RealUnionType]
+    Target = Union[TComponent, _base_prop.PropertyGroup, _PropSheet]
+
+
 class TsPySide:
+    Callable = Callable
+    Optional = Optional
+    
     Arg0 = Literal['', 'self', 'cls']
     NArgs = int  # nargs: 'number of args', int == -1 or >= 0. -1 means
     #   uncertain.
@@ -96,3 +122,8 @@ class TsPySide:
     
     QVar = 'QVariant'
     QVal = _QJSValue
+
+
+class TsTraits:
+    Properties = TProperties
+    Enumerations = Dict[str, Union[int, float, bool, str]]
