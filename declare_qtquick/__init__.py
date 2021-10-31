@@ -1,11 +1,18 @@
 from . import widgets
 from .application import Application
-from .application import app
 from .pyside import pyside
 from .pyside import reg
 from .widgets import *
 
-app.register_pyobj(pyside, 'pyside')
-app.register_pyobj(pyside, 'PySide')
+try:
+    def _setup():
+        from .application import app
+        app.register_pyobj(pyside, 'pyside')
+        app.register_pyobj(pyside, 'PySide')
+    
+    
+    _setup()
+finally:
+    del _setup
 
 __version__ = '0.1.0'

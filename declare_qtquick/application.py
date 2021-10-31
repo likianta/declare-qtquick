@@ -17,7 +17,7 @@ class _Application(QApplication):
     # qml side from being recycled by python garbage collector incorrectly.
     __pyobj_holder: Dict[str, QObject]
     
-    def __init__(self, app_name='LK QtQuick Scaffold App', **kwargs):
+    def __init__(self, app_name='Declare QtQuick Demo', **kwargs):
         """
         Args:
             app_name: str
@@ -164,13 +164,27 @@ class Application:
         
         qml = build_component(id_mgr.get_component(id_gen.root_id), level=0)
         with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(qml)
+            # f.write(qml)
+            f.write('import QtQuick' + '\n' + qml)  # TEST
         
         return output_file
     
-    @staticmethod
-    def start(qmlfile: TPath):
+    def start(self, qmlfile: TPath = None):
+        if not qmlfile:
+            from os import getcwd
+            qmlfile = getcwd() + '/' + '__declare_qtquick_autogen__' + '.qml'
+        self.build(qmlfile)
+        
         app.start(qmlfile)
+        
+    def debug(self, qmlfile: TPath = None):
+        if not qmlfile:
+            from os import getcwd
+            qmlfile = getcwd() + '/' + '__declare_qtquick_autogen__' + '.qml'
+        self.build(qmlfile)
+        
+        from .qmlside import hot_loader
+        hot_loader.start(qmlfile)
     
     # function alias for compatibility.
     launch = run = open = exec_ = start
