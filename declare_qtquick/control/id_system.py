@@ -17,7 +17,7 @@ class IdGenerator:
     def downgrade(self):
         # reset children level count
         for level in range(self.level + 1, max(self._id_chain)):
-            self._id_chain[level] = 0
+            self._id_chain.pop(level)
         self.level -= 1  # go to uplevel
     
     def gen_id(self) -> str:
