@@ -17,5 +17,5 @@ def get_current_dir(_level=1):
     return os.path.dirname(filename).replace('\\', '/')
 
 
-def current_locate(path_stub):
+def current_locate(path_stub):  # TODO: rename to 'currloc'?
     return get_current_dir(2) + '/' + path_stub
