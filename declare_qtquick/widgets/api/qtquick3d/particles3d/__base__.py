@@ -1,0 +1,4 @@
+from __declare_qtquick_internals__ import Component
+from __declare_qtquick_internals__ import P
+from __declare_qtquick_internals__ import T
+from __declare_qtquick_internals__ import W
