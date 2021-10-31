@@ -1,56 +1,29 @@
+from os import PathLike
 from typing import *
 
-TClassName = str  # e.g. 'Item', 'Rectangle', 'MouseArea', ...
-TModuleName = str
+TPath = Union[str, PathLike]
+
 TPackageName = str  # e.g. 'QtQuick.Controls'
+TWidgetName = str  # e.g. 'Item', 'Rectangle', 'MouseArea', ...
+TParentName = TWidgetName
+TPropName = str  # e.g. 'border', 'border.color', 'width', 'height', ...
 
-TProperty = str  # e.g. 'border', 'border.color', 'width', 'height', ...
-
-TQType = Literal[
+TQmlType = Literal[
     'array', 'bool', 'color', 'group', 'int', 'real', 'string', 'var'
 ]
-TQmlType = str
 
 
-# ------------------------------------------------------------------------------
-
-class _TDataNo5Value(TypedDict):
-    parent: TQmlType
-    props: Dict[TProperty, TQType]
+class TWidgetValue(TypedDict):
+    parent: Tuple[TPackageName, TWidgetName]
+    props: Dict[TPropName, TQmlType]
 
 
-TDataNo5 = Dict[TModuleName, Dict[TQmlType, _TDataNo5Value]]
-'''
-    {
-        module: {
-            qmltype: {
-                'parent': parent_qmltype,
-                'props': {prop: type, ...}
-            }, ...
-        }, ...
-    }
-'''
-
-
-class _TDataNo6Value(TypedDict):
-    parent: TClassName
-    props: Dict[TProperty, TQType]
-
-
-TDataNo6 = Dict[TPackageName, Dict[TClassName, _TDataNo6Value]]
-'''
-    {
-        TPackageName: {
-            TClassName: {
-                'parent': TClassName,
-                'props': {TProperty: TQType, ...}
-            }, ...
-        }, ...
-    }
-    e.g. {
-        'qtquick': {
+TWidgetData = Dict[TWidgetName, TWidgetValue]
+TJson3Data = Dict[TPackageName, TWidgetData]
+'''e.g. {
+        'QtQuick': {
             'Rectangle': {
-                'parent': 'Item',
+                'parent': ['QtQuick', 'Item'],
                 'props': {
                     'border': 'group',
                     'border.color': 'color',
@@ -60,3 +33,11 @@ TDataNo6 = Dict[TPackageName, Dict[TClassName, _TDataNo6Value]]
         }, ...
     }
 '''
+
+TTemplate = str
+TFormatted = str
+
+TPropType = str
+TProps = Dict[TPropName, TPropType]
+TWidgetSheetData1 = Dict[TWidgetName, Dict[TParentName, TProps]]
+TWidgetSheetData2 = Dict[TWidgetName, Tuple[TParentName, TFormatted]]
