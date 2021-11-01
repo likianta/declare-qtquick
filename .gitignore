@@ -3,4 +3,5 @@
 /examples/view.qml
 /tests/
 __pycache__
+*.mmx
 *.pyc
