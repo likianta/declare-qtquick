@@ -29,15 +29,15 @@ def build_component(comp: TComponent, level=0) -> str:
             widget_name=comp.widget_name,
             qid=comp.qid,
             properties=indent(
-                '\n'.join(build_properties(comp.properties)),
+                '\n'.join(sorted(build_properties(comp.properties))),
                 '    '
             ).lstrip() or '// NO_PROPERTY_DEFINED',
             connections=indent(
-                '\n'.join(build_connections(comp.properties)),
+                '\n'.join(sorted(build_connections(comp.properties))),
                 '    '
             ).lstrip() or '// NO_CONNECTION_DEFINED',
             signals=indent(
-                '\n'.join(build_signals(comp.signals)),
+                '\n'.join(sorted(build_signals(comp.signals))),
                 '    '
             ).lstrip() or '// NO_SIGNAL_DEFINED',
             children=indent(
