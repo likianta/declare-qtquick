@@ -1,5 +1,6 @@
 from .__ext__ import PropSheet
 from .__ext__ import Signal
+from .__ext__ import WorldStatus
 from .__ext__ import T
 from .__ext__ import ctx_mgr
 from .__ext__ import id_mgr
@@ -94,3 +95,12 @@ class Component(traits.PropGetterAndSetter,
     @property
     def widget_name(self):
         return self.__class__.__name__
+
+
+class QObject:
+    """ This is a wrapper for PySide6.QtCore.QObject.
+    
+    Detailed:
+    
+    """
+    

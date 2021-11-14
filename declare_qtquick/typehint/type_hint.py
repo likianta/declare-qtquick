@@ -1,6 +1,8 @@
 from os import PathLike as _PathLike
 from typing import *
 
+from PySide6 import QtCore as _QtCore
+from PySide6 import QtQuick as _QtQuick
 from PySide6.QtQml import QJSValue as _QJSValue
 from lk_lambdex import lambdex as _lambdex
 
@@ -14,13 +16,15 @@ _TFakeModule = _lambdex('', """
 """)()
 
 if __name__ == '__main__':
+    from PySide6.QtCore import QObject as _QObject
     from declare_qtquick.widgets.base import Component as _Component
-    from declare_qtquick.properties import base as _base_prop
-    from declare_qtquick.properties.prop_sheet import PropSheet as _PropSheet
+    from declare_qtquick.properties import base as _prop_base
+    from declare_qtquick.properties.prop_sheet import base as _prop_sheet
 else:
     _Component = None
-    _PropSheet = None
-    _base_prop = _TFakeModule
+    _QObject = None
+    _prop_base = _TFakeModule
+    _prop_sheet = _TFakeModule
 
 # ------------------------------------------------------------------------------
 
@@ -32,9 +36,9 @@ TFullName = str
 TPropName = str
 TSignalName = str
 
-TProperty = _base_prop.Property
-TPropertyGroup = _base_prop.PropertyGroup
-TSignal = _base_prop.Signal
+TProperty = _prop_base.Property
+TPropertyGroup = _prop_base.PropertyGroup
+TSignal = _prop_base.Signal
 
 TProperties = Dict[TPropName, Union[TProperty, TPropertyGroup]]
 TSignals = Dict[TSignalName, TSignal]
@@ -43,9 +47,15 @@ TBound = List[Tuple[TFullName, Optional[Callable]]]
 
 TLevel = int
 TComponent = _Component
+TQObject = _QObject
 
 
 # ------------------------------------------------------------------------------
+
+class TsBlackMagic:
+    Property = TProperty
+    QQuickItem = _QtQuick.QQuickItem
+
 
 class TsComponent:
     Component = TComponent
@@ -92,12 +102,12 @@ class TsPropSheet:
     from typing import _UnionGenericAlias as RealUnionType
     
     Constructable = Union[TProperty, Callable]
-    PropSheet = _PropSheet
-    PropSheetIter = Iterator[_PropSheet]
+    PropSheet = _prop_sheet.PropSheet
+    PropSheetIter = Iterator[_prop_sheet.PropSheet]
     Property = TProperty
     PropsIter = Iterator[Tuple[TPropName, TProperty]]
     RawType = Union[TProperty, RealUnionType]
-    Target = Union[TComponent, _base_prop.PropertyGroup, _PropSheet]
+    Target = Union[TComponent, _prop_base.PropertyGroup, _prop_sheet.PropSheet]
 
 
 class TsPySide:

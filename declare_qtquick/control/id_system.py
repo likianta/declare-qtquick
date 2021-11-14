@@ -56,6 +56,10 @@ class IdManager:
     
     def get_children(self, qid: T.Qid) -> T.QidList:
         return self._relations.get(qid, [])
+    
+    def get_all_components(self):
+        for qid, comp in self._tile_struct.items():
+            yield qid, comp
 
 
 id_gen = IdGenerator()

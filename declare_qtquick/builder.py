@@ -16,6 +16,7 @@ def build_component(comp: TComponent, level=0) -> str:
         return dedent('''
             {widget_name} {{
                 id: {qid}
+                objectName: "{qid}"
                 
                 {properties}
                 
