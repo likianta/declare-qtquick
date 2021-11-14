@@ -3,6 +3,7 @@ from typing import Optional
 from PySide6.QtQuick import QQuickItem
 
 from .__ext__ import T
+from .__ext__ import convert_name_case
 
 _root = None  # type: Optional[T.QObject]
 
@@ -20,20 +21,23 @@ def build(qobj):
     _root = qobj
 
 
-def getprop(comp, key, default_get):
+def getprop(comp, key, default_value):
     from ..properties import PropertyGroup
     if not _root:
-        return default_get(key)
-    if isinstance((x := default_get(key)), PropertyGroup):
-        return x
+        return default_value
+    if isinstance(default_value, PropertyGroup):
+        return default_value
+    
     qobj = _root.findChild(QQuickItem, comp.qid)
+    
     try:
-        return qobj.property(key)
-    except AttributeError:
+        return qobj.property(convert_name_case(key))
+    except RuntimeError:
         return PropDelegate(qobj, key)
 
 
 def setprop(comp, key, value, default_set):
+    from ..properties import Anchors
     from ..properties import PropertyGroup
     from ..qmlside import qmlside
     
@@ -45,13 +49,27 @@ def setprop(comp, key, value, default_set):
         raise Exception('This is not writable', comp, key, value)
     
     qobj = _root.findChild(comp.qid)
-    if isinstance(value, PropDelegate):
+    key = convert_name_case(key)
+    
+    if isinstance(comp, PropertyGroup):
+        group_name = convert_name_case(comp.name)
+        if isinstance(comp, Anchors):
+            if key in ('centerIn', 'fill'):
+                qmlside.bind_prop(qobj, f'{group_name}.{key}', value.qobj, '')
+            else:
+                qmlside.bind_prop(
+                    qobj, f'{group_name}.{key}', value.qobj, value.prop)
+        else:
+            qmlside.bind_prop(
+                qobj, f'{group_name}.{key}', value.qobj, value.prop)
+        
+    elif isinstance(value, PropDelegate):
         qmlside.bind_prop(qobj, key, value.qobj, value.prop)
     else:
         try:
             qobj.setProperty(key, value)
         except AttributeError:
-            qmlside.bind_prop(qobj, key, value.qobj, value.prop)
+            qmlside.bind_prop(qobj, key, value, '')
 
 
 class PropDelegate:
@@ -59,6 +77,3 @@ class PropDelegate:
     def __init__(self, qobj, prop):
         self.qobj = qobj
         self.prop = prop
-    
-    # def __setattr__(self, key, value):
-    #     qmlside.eval_js()

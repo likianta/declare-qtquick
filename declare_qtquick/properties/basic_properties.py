@@ -44,8 +44,9 @@ class AnyItem(Property):
         self._delegates = {}
 
     def __getattr__(self, key: str):
+        from ..control.traits import base_getattr
         if key.startswith('_'):
-            return super().__getattribute__(key)
+            return base_getattr(self, key)
         elif key in self.__dict__:
             return self.__dict__[key]
         elif key in self._delegates:

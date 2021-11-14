@@ -10,6 +10,7 @@ Relations:
 """
 from .base import PropertyGroup
 from .prop_sheet.api import *
+from .__ext__ import proxy
 
 __all__ = [
     'Anchors',
@@ -49,34 +50,62 @@ __all__ = [
 class Anchors(PropertyGroup, PsAnchors):
     name = 'anchors'
     
+    # ref: declare_qtquick.control.traits.PropGetterAndSetter
+    #      .__getprop__,.__setprop__
+    
     def __getprop__(self, key: str):
         if key == 'center_in' or key == 'fill':
             raise AttributeError('You cannot access this property from getter, '
                                  'this is a write-only property.', key)
         elif key == 'horizontal_center' or key == 'vertical_center':
-            return self.fullname  # str
-        elif key == 'margins' or key.endswith('_margin'):
-            return self._properties[key].value  # int or float
+            return proxy.getprop(self, key, self.fullname)  # -> str
+        elif key == 'margins' or key.endswith('_margin'):  # -> int or float
+            return proxy.getprop(self, key, self._properties[key].value)
         else:  # left, top, right, bottom
-            return f'{self.fullname}.{key}'
+            return proxy.getprop(self, key, f'{self.fullname}.{key}')
     
     def __setprop__(self, key, value):
         if key == 'center_in' or key == 'fill':
             from ..widgets.api.qtquick import Window
             if isinstance(value, str):
-                self._properties[key].set(value)
+                # # self._properties[key].set(value)
+                proxy.setprop(
+                    self, key, value,
+                    lambda key, value: self._properties[key].set(value)
+                )
             elif isinstance(value, Window):
-                self._properties[key].set(value.content_item)
+                # # self._properties[key].set(value.content_item)
+                proxy.setprop(
+                    self, key, value,
+                    lambda key, value: self._properties[key].set(
+                        value.content_item)
+                )
             else:
-                self._properties[key].set(value.qid)
+                # # self._properties[key].set(value.qid)
+                proxy.setprop(
+                    self, key, value,
+                    lambda key, value: self._properties[key].set(value.qid)
+                )
         elif key == 'margins' or key.endswith('_margin'):
             # assert isinstance(value, (int, float))
-            self._properties[key].set(value)
+            # # self._properties[key].set(value)
+            proxy.setprop(
+                self, key, value,
+                lambda key, value: self._properties[key].set(value)
+            )
         elif key == 'horizontal_center' or key == 'vertical_center':
             # assert value == key
-            self._properties[key].set(value)
+            # # self._properties[key].set(value)
+            proxy.setprop(
+                self, key, value,
+                lambda key, value: self._properties[key].set(value)
+            )
         else:  # left, top, right, bottom
-            self._properties[key].set(value)
+            # # self._properties[key].set(value)
+            proxy.setprop(
+                self, key, value,
+                lambda key, value: self._properties[key].set(value)
+            )
 
 
 class Axis(PropertyGroup, PsAxis):

@@ -98,8 +98,7 @@ class PropGetterAndSetter:
     
     def __getprop__(self, key):
         return proxy.getprop(
-            self, key,
-            lambda key: self._properties[key]
+            self, key, self._properties[key]
         )
     
     def __setprop__(self, key, value):
