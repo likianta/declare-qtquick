@@ -3,12 +3,15 @@ try:
         
         def _setup_pyside():
             from .application import app
+            from .pyside import pyside
             app.register_pyobj(pyside, 'pyside')
             app.register_pyobj(pyside, 'PySide')
             
         def _setup_qmlside():
-            from .qmlside.qlogger import setup
-            setup()
+            from .qmlside.qlogger import setup as setup1
+            from .qmlside.qmlside import setup as setup2
+            setup1()
+            setup2()
         
         def _setup_widgets_api():
             from os.path import abspath
