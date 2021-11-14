@@ -1,6 +1,7 @@
 try:
+    from .. import common
     from ..application import app
-    from ..common import current_locate
-    from ..typehint.qmlside import *
+    from ..pyside import pyside
+    from ..typehint import TsQmlSide as T  # noqa
 except Exception as e:
     raise e

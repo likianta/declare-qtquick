@@ -1,9 +1,11 @@
 from os import PathLike as _PathLike
 from typing import *
 
-from PySide6 import QtCore as _QtCore
-from PySide6 import QtQuick as _QtQuick
+from PySide6.QtCore import QObject as _QObject
 from PySide6.QtQml import QJSValue as _QJSValue
+from PySide6.QtQml import QQmlComponent as _QQmlComponent
+from PySide6.QtQml import QQmlProperty as _QQmlProperty
+from PySide6.QtQuick import QQuickItem as _QQuickItem
 from lk_lambdex import lambdex as _lambdex
 
 _TFakeModule = _lambdex('', """
@@ -16,13 +18,13 @@ _TFakeModule = _lambdex('', """
 """)()
 
 if __name__ == '__main__':
-    from PySide6.QtCore import QObject as _QObject
+    from declare_qtquick.application import Application as _Application
     from declare_qtquick.widgets.base import Component as _Component
     from declare_qtquick.properties import base as _prop_base
     from declare_qtquick.properties.prop_sheet import base as _prop_sheet
 else:
+    _Application = None
     _Component = None
-    _QObject = None
     _prop_base = _TFakeModule
     _prop_sheet = _TFakeModule
 
@@ -53,8 +55,11 @@ TQObject = _QObject
 # ------------------------------------------------------------------------------
 
 class TsBlackMagic:
+    Application = _Application
     Property = TProperty
-    QQuickItem = _QtQuick.QQuickItem
+    QObject = TQObject
+    QQuickItem = _QQuickItem
+    Root = Optional[TQObject]
 
 
 class TsComponent:
@@ -136,6 +141,65 @@ class TsPySide:
     
     QVar = 'QVariant'
     QVal = _QJSValue
+
+
+class TsQmlSide:
+    class JsEvaluatorCore:
+        
+        @staticmethod
+        def bind(t_obj: TQObject, s_obj: TQObject, expression: str): pass
+        
+        @staticmethod
+        def connect_prop(*_, **__) -> Any: pass
+        
+        @staticmethod
+        def create_component(_: str) -> TComponent: pass
+        
+        @staticmethod
+        def create_object(component: TComponent,
+                          container: TQObject) -> TQObject: pass
+        
+        @staticmethod
+        def eval_js(code: str, args: List[TQObject]): pass
+        
+        @staticmethod
+        def test() -> str: pass
+    
+    Iterator = Iterator
+    Callable = Callable
+    
+    Arg0 = Literal['', 'self', 'cls']
+    NArgs = int  # nargs: 'number of args', int == -1 or >= 0. -1 means uncertain.
+    
+    PyClassName = str
+    PyFuncName = str
+    PyMethName = str
+    _RegisteredName = str  # usually this name is same with `PyFuncName` or
+    #   `PyMethName`, but you can define it with a custom name (something likes
+    #   alias).
+    
+    PyClassHolder = Dict[
+        PyClassName, Dict[
+            PyMethName, Tuple[_RegisteredName, NArgs]
+        ]
+    ]
+    
+    _PyFunction = Callable
+    PyFuncHolder = Dict[_RegisteredName, Tuple[_PyFunction, NArgs]]
+    
+    QVar = 'QVariant'
+    QVal = _QJSValue
+    
+    QObject = TQObject
+    Property = _QQmlProperty
+    PropName = TPropName
+    Component = _QQmlComponent
+    
+    Sender = Tuple[TQObject, TPropName]
+    Receptor = Tuple[TQObject, TPropName]
+    
+    QmlFile = Union[_PathLike, str]
+    ComponentCache = Dict[QmlFile, Component]
 
 
 class TsTraits:

@@ -1,17 +1,17 @@
 from PySide6.QtQml import QQmlComponent
 from lk_logger import lk
 
-from .__ext__ import TJsEvaluatorCore
+from .__ext__ import T
 from .__ext__ import app
-from .__ext__ import current_locate
+from .__ext__ import common
 
 
 class JsEvaluator:
-    core: TJsEvaluatorCore
+    core: T.JsEvaluatorCore
     
     def __init__(self):
         component = QQmlComponent(
-            app.engine, current_locate('js_evaluator_controls.qml'))
+            app.engine, common.current_locate('js_evaluator.qml'))
         qobject = component.create()
         self.core = qobject
         
