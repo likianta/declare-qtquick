@@ -164,8 +164,31 @@ class Application:
         
         qml = build_component(id_mgr.get_component(id_gen.root_id), level=0)
         with open(output_file, 'w', encoding='utf-8') as f:
-            # f.write(qml)
-            f.write('import QtQuick\nimport QtQuick.Controls' + '\n\n' + qml)  # TEST
+            from textwrap import dedent, indent
+            # # f.write(qml)
+            
+            # TEST
+            from .pyside import pyside
+            
+            def _ensoul(qobj):
+                from .black_magic import proxy
+                proxy.build(qobj)
+                
+            pyside.register(_ensoul)
+            
+            qml = dedent('''
+                import QtQuick
+                import QtQuick.Controls
+                
+            ''').lstrip() + qml
+            qml = qml[:-2] + indent(dedent('''
+                
+                Component.onCompleted: {
+                    console.log('get started by declare-qtquick engine.')
+                    pyside.call('_ensoul', this)
+                }
+            ''').rstrip(), '    ') + qml[-2:]
+            f.write(qml)
         
         return output_file
     

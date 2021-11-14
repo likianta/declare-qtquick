@@ -1,6 +1,7 @@
 import re
 
-from .__ext__ import TsTraits as T
+from .__ext__ import TsTraits as T  # noqa
+from .__ext__ import proxy
 
 ENUMS = '_enumerations'
 PROPS = '_properties'
@@ -96,10 +97,16 @@ class PropGetterAndSetter:
             base_setattr(self, key, value)
     
     def __getprop__(self, key):
-        return self._properties[key]
+        return proxy.getprop(
+            self, key,
+            lambda key: self._properties[key]
+        )
     
     def __setprop__(self, key, value):
-        self._properties[key].set(value)
+        return proxy.setprop(
+            self, key, value,
+            lambda key, value: self._properties[key].set(value)
+        )
 
 
 class SignalHandler:
